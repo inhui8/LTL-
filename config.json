@@ -1,0 +1,17 @@
+{
+    "daylight": {
+        "url": "https://api.dylt.com",
+        "oauth_endpoint": "/oauth/client_credential/accesstoken",
+        "rate_quote_endpoint": "/rateQuote",
+        "client_id": "GtuprrEGLuUwCaTgX9q3rVhGr56GfbPn",
+        "client_secret": "FqYurcoCoZPRnUme"
+    },
+    "auptix": {
+        "url": "https://api.flockfreight.com",
+        "rate_quote_endpoint": "/rate-requests",
+        "api_key": "ChlkNzN0bW15ZGFkc2Jkb2JqaWFyazNqdWRhEhl3enYyZmg2dHhoM2ptMnVyaDV1cTNxN3do"
+    },
+    "cnusaexpress": {
+        "url": "http://order.cnusaexpress.com/Default1/LTLFreightinquiry"
+    }
+}
