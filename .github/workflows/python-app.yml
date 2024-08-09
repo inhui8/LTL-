@@ -17,10 +17,10 @@ jobs:
     steps:
     - uses: actions/checkout@v4
     
-    - name: Set up Python 3.10
+    - name: Set up Python 3.12.4
       uses: actions/setup-python@v3
       with:
-        python-version: "3.10"
+        python-version: "3.12.4"
     
     - name: Install dependencies
       run: |
@@ -42,6 +42,6 @@ jobs:
     #   run: |
     #     pytest
     
-    - name: Run startup.py
+    - name: Run Flask app with Gunicorn
       run: |
-        python startup.py
+        gunicorn --bind 0.0.0.0:8000 startup:app
