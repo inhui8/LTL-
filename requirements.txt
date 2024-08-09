@@ -64,3 +64,4 @@ wcwidth==0.2.13
 webencodings==0.5.1
 Werkzeug==3.0.3
 yarg==0.1.9
+gunicorn==20.1.0
