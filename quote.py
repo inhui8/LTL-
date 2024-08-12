@@ -6,8 +6,9 @@ from rate_quote import RateQuoteAPI, AuptixRateQuoteAPI
 from flask_cors import CORS
 import time
 
+
 app = Flask(__name__)
-CORS(app)
+CORS(app, resources={r"/*": {"origins": "http://127.0.0.1:5501"}})
 
 data_queue = []
 
@@ -113,7 +114,7 @@ def map_accessorials(accessorials):
         'Overlength 20 ft or greater': 'Delivery',
         'Compliance Services Fee': 'Delivery'
     }
-    return [{'accId': acc_id.strip(), 'accName': mapping.get(acc_id.strip(), 'Other/O')} for acc_id in accessorials]
+    return [{'accId': acc_id.strip(), 'accName': mapping.get(acc_id.strip(), 'O')} for acc_id in accessorials]
 
 def process_daylight_quote(so_data, items, mapped_accessorials, daylight_api):
     pickup_date_str = so_data['pick_up_date']
@@ -186,7 +187,7 @@ def process_auptix_quote(so_data, item_data, length, width, height, weight, actu
             "deliveryStopDetails": {
                 "postalCode": str(int(float(so_data.get('zip', '')))),
                 "locationType": so_data.get('locationType', 'BUSINESS_NO_DOCK'),
-                "hasPalletJackAndForklift": so_data.get('hasPalletJackAndForklift', False),
+                "hasPalletJackAndForklift": True,
                 "schedulingService": {
                     "type": so_data.get('delivery_ServiceType', 'CALL_FOR_APPOINTMENT'),
                     "date": pickup_date_str,
@@ -196,7 +197,7 @@ def process_auptix_quote(so_data, item_data, length, width, height, weight, actu
             },
             "shipmentItems": [
                 {
-                    "quantity": item_data['pallet number'],
+                    "quantity": str(item_data['pallet number']),
                     "packagingType": "PALLET",
                     "dimensions": {
                         "lengthIn": length,
