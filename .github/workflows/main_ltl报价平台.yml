@@ -63,5 +63,4 @@ jobs:
         id: deploy-to-webapp
         with:
           app-name: 'LTL报价平台'
-          slot-name: 'Production'
           publish-profile: ${{ secrets.AZUREAPPSERVICE_PUBLISHPROFILE_8B5B4B1C4B814E32943EC8339DFD2B71 }}
