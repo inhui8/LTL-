@@ -8,7 +8,7 @@ import time
 
 
 app = Flask(__name__)
-CORS(app)
+CORS(app, resources={r"/*": {"origins": "*"}})
 
 data_queue = []
 
