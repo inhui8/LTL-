@@ -1,6 +1,6 @@
 {
     "daylight": {
-        "url": "https://api.dylt.com",
+        "url": "https://test-api.dylt.com",
         "oauth_endpoint": "/oauth/client_credential/accesstoken",
         "rate_quote_endpoint": "/rateQuote",
         "client_id": "GtuprrEGLuUwCaTgX9q3rVhGr56GfbPn",

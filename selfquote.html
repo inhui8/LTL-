@@ -1,0 +1,258 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>LTL报价</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: #f4f4f9;
+        }
+        .container {
+            width: 80%;
+            margin: 0 auto;
+            padding: 20px;
+            background: white;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+            margin-top: 40px;
+        }
+        h1 {
+            text-align: center;
+            color: #333;
+        }
+        form {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            gap: 10px;
+            margin-bottom: 20px;
+        }
+        input[type="file"] {
+            padding: 10px;
+        }
+        button {
+            background-color: #007bff;
+            color: white;
+            padding: 10px 20px;
+            border: none;
+            cursor: pointer;
+            border-radius: 5px;
+            transition: background-color 0.3s ease;
+        }
+        button:hover {
+            background-color: #0056b3;
+        }
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-top: 20px;
+        }
+        th, td {
+            padding: 12px;
+            border: 1px solid #ddd;
+            text-align: center;
+        }
+        th {
+            background-color: #007bff;
+            color: white;
+        }
+        tbody tr:nth-child(even) {
+            background-color: #f2f2f2;
+        }
+        #download-btn {
+            margin-top: 20px;
+            display: block;
+            text-align: center;
+        }
+        #results-table {
+            display: none;
+        }
+        .loading {
+            text-align: center;
+            margin-top: 20px;
+        }
+        .loading i {
+            font-size: 50px;
+            color: #007bff;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>LTL报价</h1>
+        <form id="upload-form">
+            <input type="file" id="file-input" accept=".xlsx" />
+            <button type="submit"><i class="fas fa-upload"></i> Upload and Process</button>
+        </form>
+        <div class="loading" id="loading" style="display: none;">
+            <i class="fas fa-spinner fa-spin"></i>
+            <p>Processing... Please wait.</p>
+        </div>
+        <table id="results-table">
+            <thead>
+                <tr>
+                    <th>SO</th>
+                    <th>Accessorials</th>
+                    <th>Street Address</th>
+                    <th>City</th>
+                    <th>State</th>
+                    <th>Zip</th>
+                    <th>Measurement</th>
+                    <th>Weight</th>
+                    <th>Pallet Number</th>
+                    <th>Daylight</th>
+                    <th>Daylight Class</th>
+                    <th>Auptix Class</th>
+                    <th>Auptix Standard Inflexible</th>
+                    <th>Auptix Flock Direct Inflexible</th>
+                </tr>
+            </thead>
+            <tbody>
+            </tbody>
+        </table>
+        <button id="download-btn" style="display: none;"><i class="fas fa-download"></i> Download Results</button>
+    </div>
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/xlsx/0.16.2/xlsx.full.min.js"></script>
+    <script>
+        document.getElementById('upload-form').addEventListener('submit', async (event) => {
+            event.preventDefault();
+
+            const fileInput = document.getElementById('file-input');
+            const file = fileInput.files[0];
+            if (!file) {
+                alert('Please select a file to upload');
+                return;
+            }
+
+            const reader = new FileReader();
+            reader.onload = async (e) => {
+                const data = new Uint8Array(e.target.result);
+                const workbook = XLSX.read(data, { type: 'array' });
+
+                // Assuming data is in the first sheet
+                const firstSheet = workbook.Sheets[workbook.SheetNames[0]];
+                const jsonData = XLSX.utils.sheet_to_json(firstSheet);
+
+                document.getElementById('loading').style.display = 'block';
+                document.getElementById('results-table').style.display = 'table';
+
+                // Function to convert Excel date to JS date format
+                function excelDateToJSDate(serial) {
+                    const utc_days = Math.floor(serial - 25569);
+                    const date_info = new Date(utc_days * 86400 * 1000);
+
+                    const year = date_info.getUTCFullYear();
+                    const month = ("0" + (date_info.getUTCMonth() + 1)).slice(-2);
+                    const day = ("0" + date_info.getUTCDate()).slice(-2);
+
+                    return `${year}-${month}-${day}`;
+                }
+
+                // Process each row in the Excel file one by one to ensure order
+                for (const row of jsonData) {
+                    const measurement = row['mesurement'];
+                    const [length, width, height] = measurement.split('*').map(dim => parseInt(dim.trim(), 10) || 0);
+                    
+                    const pickUpDate = excelDateToJSDate(row['pick_up_date']);
+
+                    const requestBody = {
+                        so: row['SO'] || '',
+                        accessorials: row['Accessorials'] ? row['Accessorials'].split(',').map(item => item.trim()) : [],
+                        length: length,
+                        width: width,
+                        height: height,
+                        weight: parseInt(row['weight']),
+                        zip: row['zip'],
+                        palletNumber: parseInt(row['pallet number']),
+                        pickUpDate: pickUpDate,
+                        deliveryServiceType: row['delivery_ServiceType'],
+                        locationType: row['locationType'],
+                        hasPalletJackAndForklift: true,
+                        shipmentServiceType: row['shipment_ServiceType']
+                    };
+                    // Add the row to the table first and fetch the quote immediately
+                    addRowToTable(requestBody);
+                    await fetchQuoteAndUpdateRow(requestBody.so, requestBody);
+                }
+                document.getElementById('loading').style.display = 'none';
+                document.getElementById('download-btn').style.display = 'block';
+            };
+            reader.readAsArrayBuffer(file);
+        });
+
+        function addRowToTable(data) {
+            const tableBody = document.getElementById('results-table').querySelector('tbody');
+            const row = tableBody.insertRow();
+            if (!row) {
+                console.error('Failed to create a new table row.');
+                return;
+            }
+            row.id = data.so; // Use SO as the row ID for easy access later
+            row.insertCell().textContent = data.so;
+            row.insertCell().textContent = data.accessorials.join(', ');
+            row.insertCell().textContent = ''; // Street Address
+            row.insertCell().textContent = ''; // City
+            row.insertCell().textContent = ''; // State
+            row.insertCell().textContent = data.zip;
+            row.insertCell().textContent = `${data.length}*${data.width}*${data.height}`;
+            row.insertCell().textContent = data.weight;
+            row.insertCell().textContent = data.palletNumber;
+            row.insertCell().textContent = 'Pending...'; // Placeholder for Daylight
+            row.insertCell().textContent = 'Pending...'; // Placeholder for Daylight Class
+            row.insertCell().textContent = 'Pending...'; // Placeholder for Auptix Class
+            row.insertCell().textContent = 'Pending...'; // Placeholder for Auptix Standard Inflexible
+            row.insertCell().textContent = 'Pending...'; // Placeholder for Auptix Flock Direct Inflexible
+        }
+        async function fetchQuoteAndUpdateRow(so, requestBody) {
+            let retries = 3;
+            while (retries > 0) {
+                try {
+                    const response = await fetch('http://127.0.0.1:5000/process_form', {
+                        method: 'POST',
+                        headers: {
+                            'Content-Type': 'application/json',
+                        },
+                        body: JSON.stringify(requestBody)
+                    });
+
+                    if (response.ok) {
+                        const data = await response.json();
+                        updateRowWithResponse(so, data);
+                        return; // Success, exit the loop
+                    } else {
+                        console.error(`Error processing row with SO ${so}: ${response.statusText}`);
+                    }
+                } catch (error) {
+                    console.error(`Request failed for row with SO ${so}:`, error);
+                }
+                retries--;
+            }
+            console.error(`Failed to process row with SO ${so} after 3 attempts.`);
+        }
+        function updateRowWithResponse(so, data) {
+            const row = document.getElementById(so);
+            
+            // Check if the row exists before trying to update it
+            if (!row) {
+                console.error(`Row with SO ${so} does not exist.`);
+                return;
+            }
+            row.cells[9].textContent = (data.Daylight*1.15).toFixed(2) || 'N/A'; // Update Daylight price
+            row.cells[10].textContent = data['Daylight Class'] || 'N/A'; // Update Daylight Class
+            row.cells[11].textContent = data['Auptix Class'] || 'N/A'; // Update Auptix Class
+            row.cells[12].textContent = (data['Auptix Standard Inflexible']*1.15).toFixed(2)  || 'N/A'; // Update Auptix Standard Inflexible
+            row.cells[13].textContent = (data['Auptix Flock Direct Inflexible']*1.15).toFixed(2)  || 'N/A';// Update Auptix Flock Direct Inflexible price
+        }
+        document.getElementById('download-btn').addEventListener('click', () => {
+            const table = document.getElementById('results-table');
+            const workbook = XLSX.utils.table_to_book(table);
+            XLSX.writeFile(workbook, 'results.xlsx');
+        });
+    </script>
+</body>
+</html>
