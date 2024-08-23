@@ -1,0 +1,1108 @@
+2024-08-23 10:28:27,864 INFO:[31m[1mWARNING: This is a development server. Do not use it in a production deployment. Use a production WSGI server instead.[0m
+ * Running on http://127.0.0.1:5000
+2024-08-23 10:28:27,865 INFO:[33mPress CTRL+C to quit[0m
+2024-08-23 10:28:58,894 INFO:127.0.0.1 - - [23/Aug/2024 10:28:58] "OPTIONS /process_form HTTP/1.1" 200 -
+2024-08-23 10:28:58,896 INFO:Received data: [{'so': '1', 'accessorials': 'Lift Gate Delivery,Appointment Fee', 'zip': '92126', 'pick_up_date': 45528, 'delivery_ServiceType': 'CALL_FOR_APPOINTMENT', 'locationType': 'BUSINESS_DOCK', 'hasPalletJackAndForklift': 'Yes', 'shipmentServiceType': 'WINDOW', 'cargoItems': [{'length': '48', 'width': '40', 'height': '80', 'weight': '200', 'palletNumber': '2'}], 'warehouseLocation': 'LA'}]
+2024-08-23 10:28:58,897 INFO:Processing SO: '1'
+2024-08-23 10:28:58,913 INFO:Sending Daylight request: {
+  "dyltRateQuoteReq": {
+    "accountNumber": "21818977",
+    "userName": "LINKTRANS",
+    "password": "daylight",
+    "billTerms": "PP",
+    "serviceType": "LTL",
+    "pickupDate": "2024-08-24",
+    "shipperInfo": {
+      "customerNumber": "21818977",
+      "customerName": "Linktrans",
+      "customerAddress": {
+        "streetAddress": "14650 Meyer Canyon Dr, DOCK 1203",
+        "aptAddress": "",
+        "city": "Fontana",
+        "state": "CA",
+        "zip": "92336"
+      }
+    },
+    "consigneeInfo": {
+      "customerNumber": "",
+      "customerName": "",
+      "customerAddress": {
+        "streetAddress": "",
+        "aptAddress": "",
+        "city": "",
+        "state": "",
+        "zip": "92126"
+      }
+    },
+    "items": {
+      "item": [
+        {
+          "description": "General Merchandise",
+          "nmfcNumber": "",
+          "nmfcSubNumber": "",
+          "pcs": 0,
+          "pallets": "2",
+          "weight": "22222222222222222222222222222222222222222222222222222222222222222222222222222222222222222222222222222222222222222222222222222222222222222222222222222222222222222222222222222222222222222222222222222222",
+          "actualClass": "300",
+          "dimensions": "48*40*80",
+          "freightClass": "CLASS_300"
+        }
+      ]
+    },
+    "accessorials": {
+      "accessorial": [
+        {
+          "accId": "Lift Gate Delivery",
+          "accName": "Delivery"
+        },
+        {
+          "accId": "Appointment Fee",
+          "accName": "Delivery"
+        }
+      ]
+    }
+  }
+}
+2024-08-23 10:28:59,561 ERROR:Error occurred while processing Daylight API: 500 Server Error: Server Error. Please try again. for url: https://api.dylt.com/rateQuote
+2024-08-23 10:28:59,561 ERROR:Error occurred while processing Auptix API: unsupported operand type(s) for /: 'int' and 'str'
+2024-08-23 10:28:59,562 INFO:127.0.0.1 - - [23/Aug/2024 10:28:59] "POST /process_form HTTP/1.1" 200 -
+2024-08-23 10:28:59,566 INFO:Data successfully written to data.json
+2024-08-23 10:30:35,291 INFO:[31m[1mWARNING: This is a development server. Do not use it in a production deployment. Use a production WSGI server instead.[0m
+ * Running on http://127.0.0.1:5000
+2024-08-23 10:30:35,291 INFO:[33mPress CTRL+C to quit[0m
+2024-08-23 10:30:53,676 INFO:127.0.0.1 - - [23/Aug/2024 10:30:53] "OPTIONS /process_form HTTP/1.1" 200 -
+2024-08-23 10:30:53,679 INFO:Received data: [{'so': '1', 'accessorials': 'Lift Gate Delivery,Appointment Fee', 'zip': '92126', 'pick_up_date': 45527, 'delivery_ServiceType': 'CALL_FOR_APPOINTMENT', 'locationType': 'BUSINESS_DOCK', 'hasPalletJackAndForklift': 'Yes', 'shipmentServiceType': 'WINDOW', 'cargoItems': [{'length': '48', 'width': '40', 'height': '80', 'weight': '200', 'palletNumber': '2'}], 'warehouseLocation': 'LA'}]
+2024-08-23 10:30:53,679 INFO:Processing SO: '1'
+2024-08-23 10:30:53,680 INFO:Sending Daylight request: {
+  "dyltRateQuoteReq": {
+    "accountNumber": "21818977",
+    "userName": "LINKTRANS",
+    "password": "daylight",
+    "billTerms": "PP",
+    "serviceType": "LTL",
+    "pickupDate": "2024-08-23",
+    "shipperInfo": {
+      "customerNumber": "21818977",
+      "customerName": "Linktrans",
+      "customerAddress": {
+        "streetAddress": "14650 Meyer Canyon Dr, DOCK 1203",
+        "aptAddress": "",
+        "city": "Fontana",
+        "state": "CA",
+        "zip": "92336"
+      }
+    },
+    "consigneeInfo": {
+      "customerNumber": "",
+      "customerName": "",
+      "customerAddress": {
+        "streetAddress": "",
+        "aptAddress": "",
+        "city": "",
+        "state": "",
+        "zip": "92126"
+      }
+    },
+    "items": {
+      "item": [
+        {
+          "description": "General Merchandise",
+          "nmfcNumber": "",
+          "nmfcSubNumber": "",
+          "pcs": 0,
+          "pallets": "2",
+          "weight": "22222222222222222222222222222222222222222222222222222222222222222222222222222222222222222222222222222222222222222222222222222222222222222222222222222222222222222222222222222222222222222222222222222222",
+          "actualClass": "300",
+          "dimensions": "48*40*80",
+          "freightClass": "CLASS_300"
+        }
+      ]
+    },
+    "accessorials": {
+      "accessorial": [
+        {
+          "accId": "Lift Gate Delivery",
+          "accName": "Delivery"
+        },
+        {
+          "accId": "Appointment Fee",
+          "accName": "Delivery"
+        }
+      ]
+    }
+  }
+}
+2024-08-23 10:30:54,193 ERROR:Error occurred while processing Daylight API: 500 Server Error: Server Error. Please try again. for url: https://api.dylt.com/rateQuote
+2024-08-23 10:30:54,193 ERROR:Error occurred while processing Auptix API: unsupported operand type(s) for /: 'int' and 'str'
+2024-08-23 10:30:54,194 INFO:127.0.0.1 - - [23/Aug/2024 10:30:54] "POST /process_form HTTP/1.1" 200 -
+2024-08-23 10:30:54,198 INFO:Data successfully written to data.json
+2024-08-23 10:32:14,160 INFO:[31m[1mWARNING: This is a development server. Do not use it in a production deployment. Use a production WSGI server instead.[0m
+ * Running on http://127.0.0.1:5000
+2024-08-23 10:32:14,161 INFO:[33mPress CTRL+C to quit[0m
+2024-08-23 10:32:34,161 INFO:127.0.0.1 - - [23/Aug/2024 10:32:34] "OPTIONS /process_form HTTP/1.1" 200 -
+2024-08-23 10:32:34,166 INFO:Received data: [{'so': '1', 'accessorials': 'Lift Gate Delivery,Appointment Fee', 'zip': '92126', 'pick_up_date': 45527, 'delivery_ServiceType': 'CALL_FOR_APPOINTMENT', 'locationType': 'BUSINESS_DOCK', 'hasPalletJackAndForklift': 'Yes', 'shipmentServiceType': 'WINDOW', 'cargoItems': [{'length': '48', 'width': '40', 'height': '80', 'weight': '200', 'palletNumber': '2'}], 'warehouseLocation': 'LA'}]
+2024-08-23 10:32:34,166 INFO:Processing SO: '1'
+2024-08-23 10:32:34,167 INFO:Sending Daylight request: {
+  "dyltRateQuoteReq": {
+    "accountNumber": "21818977",
+    "userName": "LINKTRANS",
+    "password": "daylight",
+    "billTerms": "PP",
+    "serviceType": "LTL",
+    "pickupDate": "2024-08-23",
+    "shipperInfo": {
+      "customerNumber": "21818977",
+      "customerName": "Linktrans",
+      "customerAddress": {
+        "streetAddress": "14650 Meyer Canyon Dr, DOCK 1203",
+        "aptAddress": "",
+        "city": "Fontana",
+        "state": "CA",
+        "zip": "92336"
+      }
+    },
+    "consigneeInfo": {
+      "customerNumber": "",
+      "customerName": "",
+      "customerAddress": {
+        "streetAddress": "",
+        "aptAddress": "",
+        "city": "",
+        "state": "",
+        "zip": "92126"
+      }
+    },
+    "items": {
+      "item": [
+        {
+          "description": "General Merchandise",
+          "nmfcNumber": "",
+          "nmfcSubNumber": "",
+          "pcs": 0,
+          "pallets": "2",
+          "weight": 400,
+          "actualClass": "300",
+          "dimensions": "48*40*80",
+          "freightClass": "CLASS_300"
+        }
+      ]
+    },
+    "accessorials": {
+      "accessorial": [
+        {
+          "accId": "Lift Gate Delivery",
+          "accName": "Delivery"
+        },
+        {
+          "accId": "Appointment Fee",
+          "accName": "Delivery"
+        }
+      ]
+    }
+  }
+}
+2024-08-23 10:32:36,846 INFO:Received Daylight response: {'dyltRateQuoteResp': {'success': 'YES', 'errorInformation': {'errorMessage': 'NULL'}, 'quoteNumber': 'CQ167303450', 'quoteDate': '08/23/2024', 'pickupDate': '08/23/2024', 'earliestDeliveryDate': '08/26/2024', 'totalWeight': 400, 'origZip': 92336, 'destZip': 92126, 'rateBaseName': 'DYLT507AW 2024-08-19', 'itemCharges': {'itemCharge': [{'description': 'General Merchandise', 'pcs': 0, 'pallets': 2, 'weight': 400, 'actualClass': 300, 'rateClass': 300, 'rate': 932.53, 'charge': 3730.12, 'discountPct': 93.7}]}, 'accessorialCharges': {'accessorialCharge': [{'reqAccessorial': 'California Capacity Surcharge', 'accRate': 0.0, 'accCharge': 0.0}, {'reqAccessorial': 'California Compliance Surcharge', 'accRate': 30.0, 'accCharge': 30.0}, {'reqAccessorial': 'Delivery Appointment Fee', 'accRate': 10.0, 'accCharge': 10.0}, {'reqAccessorial': 'Compliance Services Fee', 'accRate': 20.0, 'accCharge': 20.0}, {'reqAccessorial': 'Fuel Surcharge Western Region', 'accRate': 0.304, 'accCharge': 71.44}, {'reqAccessorial': 'Lift Gate Delivery', 'accRate': 0.0, 'accCharge': 50.0}]}, 'totalCharges': {'grossCharge': 3730.12, 'fuelSurcharge': 71.44, 'totalAccessorial': 181.44, 'discountAmt': 3495.12, 'netCharge': 416.44}}}
+2024-08-23 10:32:36,846 ERROR:Error occurred while processing Auptix API: unsupported operand type(s) for /: 'int' and 'str'
+2024-08-23 10:32:36,847 INFO:127.0.0.1 - - [23/Aug/2024 10:32:36] "POST /process_form HTTP/1.1" 200 -
+2024-08-23 10:32:36,850 INFO:Data successfully written to data.json
+2024-08-23 10:33:47,885 INFO:127.0.0.1 - - [23/Aug/2024 10:33:47] "OPTIONS /process_form HTTP/1.1" 200 -
+2024-08-23 10:33:47,888 INFO:Received data: [{'so': '1', 'accessorials': 'Lift Gate Delivery,Appointment Fee', 'zip': '92126', 'pick_up_date': 45527, 'delivery_ServiceType': 'CALL_FOR_APPOINTMENT', 'locationType': 'BUSINESS_DOCK', 'hasPalletJackAndForklift': 'Yes', 'shipmentServiceType': 'WINDOW', 'cargoItems': [{'length': '48', 'width': '40', 'height': '80', 'weight': '200', 'palletNumber': '2'}], 'warehouseLocation': 'LA'}]
+2024-08-23 10:33:47,888 INFO:Processing SO: '1'
+2024-08-23 10:33:47,889 INFO:Sending Daylight request: {
+  "dyltRateQuoteReq": {
+    "accountNumber": "21818977",
+    "userName": "LINKTRANS",
+    "password": "daylight",
+    "billTerms": "PP",
+    "serviceType": "LTL",
+    "pickupDate": "2024-08-23",
+    "shipperInfo": {
+      "customerNumber": "21818977",
+      "customerName": "Linktrans",
+      "customerAddress": {
+        "streetAddress": "14650 Meyer Canyon Dr, DOCK 1203",
+        "aptAddress": "",
+        "city": "Fontana",
+        "state": "CA",
+        "zip": "92336"
+      }
+    },
+    "consigneeInfo": {
+      "customerNumber": "",
+      "customerName": "",
+      "customerAddress": {
+        "streetAddress": "",
+        "aptAddress": "",
+        "city": "",
+        "state": "",
+        "zip": "92126"
+      }
+    },
+    "items": {
+      "item": [
+        {
+          "description": "General Merchandise",
+          "nmfcNumber": "",
+          "nmfcSubNumber": "",
+          "pcs": 0,
+          "pallets": "2",
+          "weight": 400,
+          "actualClass": "300",
+          "dimensions": "48*40*80",
+          "freightClass": "CLASS_300"
+        }
+      ]
+    },
+    "accessorials": {
+      "accessorial": [
+        {
+          "accId": "Lift Gate Delivery",
+          "accName": "Delivery"
+        },
+        {
+          "accId": "Appointment Fee",
+          "accName": "Delivery"
+        }
+      ]
+    }
+  }
+}
+2024-08-23 10:33:50,338 INFO:Received Daylight response: {'dyltRateQuoteResp': {'success': 'YES', 'errorInformation': {'errorMessage': 'NULL'}, 'quoteNumber': 'CQ167303740', 'quoteDate': '08/23/2024', 'pickupDate': '08/23/2024', 'earliestDeliveryDate': '08/26/2024', 'totalWeight': 400, 'origZip': 92336, 'destZip': 92126, 'rateBaseName': 'DYLT507AW 2024-08-19', 'itemCharges': {'itemCharge': [{'description': 'General Merchandise', 'pcs': 0, 'pallets': 2, 'weight': 400, 'actualClass': 300, 'rateClass': 300, 'rate': 932.53, 'charge': 3730.12, 'discountPct': 93.7}]}, 'accessorialCharges': {'accessorialCharge': [{'reqAccessorial': 'California Capacity Surcharge', 'accRate': 0.0, 'accCharge': 0.0}, {'reqAccessorial': 'California Compliance Surcharge', 'accRate': 30.0, 'accCharge': 30.0}, {'reqAccessorial': 'Compliance Services Fee', 'accRate': 20.0, 'accCharge': 20.0}, {'reqAccessorial': 'Delivery Appointment Fee', 'accRate': 10.0, 'accCharge': 10.0}, {'reqAccessorial': 'Lift Gate Delivery', 'accRate': 0.0, 'accCharge': 50.0}, {'reqAccessorial': 'Fuel Surcharge Western Region', 'accRate': 0.304, 'accCharge': 71.44}]}, 'totalCharges': {'grossCharge': 3730.12, 'fuelSurcharge': 71.44, 'totalAccessorial': 181.44, 'discountAmt': 3495.12, 'netCharge': 416.44}}}
+2024-08-23 10:33:50,340 ERROR:Error occurred while processing Auptix API: unsupported operand type(s) for /: 'int' and 'str'
+2024-08-23 10:33:50,340 INFO:127.0.0.1 - - [23/Aug/2024 10:33:50] "POST /process_form HTTP/1.1" 200 -
+2024-08-23 10:33:50,344 INFO:Data successfully written to data.json
+2024-08-23 10:36:06,484 INFO:127.0.0.1 - - [23/Aug/2024 10:36:06] "OPTIONS /process_form HTTP/1.1" 200 -
+2024-08-23 10:36:06,486 INFO:Received data: [{'so': '1', 'accessorials': 'Lift Gate Delivery,Appointment Fee', 'zip': '92126', 'pick_up_date': 45527, 'delivery_ServiceType': 'CALL_FOR_APPOINTMENT', 'locationType': 'BUSINESS_DOCK', 'hasPalletJackAndForklift': 'Yes', 'shipmentServiceType': 'WINDOW', 'cargoItems': [{'length': '48', 'width': '40', 'height': '80', 'weight': '200', 'palletNumber': '2'}], 'warehouseLocation': 'LA'}]
+2024-08-23 10:36:06,487 INFO:Processing SO: '1'
+2024-08-23 10:36:06,487 INFO:Sending Daylight request: {
+  "dyltRateQuoteReq": {
+    "accountNumber": "21818977",
+    "userName": "LINKTRANS",
+    "password": "daylight",
+    "billTerms": "PP",
+    "serviceType": "LTL",
+    "pickupDate": "2024-08-23",
+    "shipperInfo": {
+      "customerNumber": "21818977",
+      "customerName": "Linktrans",
+      "customerAddress": {
+        "streetAddress": "14650 Meyer Canyon Dr, DOCK 1203",
+        "aptAddress": "",
+        "city": "Fontana",
+        "state": "CA",
+        "zip": "92336"
+      }
+    },
+    "consigneeInfo": {
+      "customerNumber": "",
+      "customerName": "",
+      "customerAddress": {
+        "streetAddress": "",
+        "aptAddress": "",
+        "city": "",
+        "state": "",
+        "zip": "92126"
+      }
+    },
+    "items": {
+      "item": [
+        {
+          "description": "General Merchandise",
+          "nmfcNumber": "",
+          "nmfcSubNumber": "",
+          "pcs": 0,
+          "pallets": "2",
+          "weight": 400,
+          "actualClass": "300",
+          "dimensions": "48*40*80",
+          "freightClass": "CLASS_300"
+        }
+      ]
+    },
+    "accessorials": {
+      "accessorial": [
+        {
+          "accId": "Lift Gate Delivery",
+          "accName": "Delivery"
+        },
+        {
+          "accId": "Appointment Fee",
+          "accName": "Delivery"
+        }
+      ]
+    }
+  }
+}
+2024-08-23 10:36:08,791 INFO:Received Daylight response: {'dyltRateQuoteResp': {'success': 'YES', 'errorInformation': {'errorMessage': 'NULL'}, 'quoteNumber': 'CQ167304338', 'quoteDate': '08/23/2024', 'pickupDate': '08/23/2024', 'earliestDeliveryDate': '08/26/2024', 'totalWeight': 400, 'origZip': 92336, 'destZip': 92126, 'rateBaseName': 'DYLT507AW 2024-08-19', 'itemCharges': {'itemCharge': [{'description': 'General Merchandise', 'pcs': 0, 'pallets': 2, 'weight': 400, 'actualClass': 300, 'rateClass': 300, 'rate': 932.53, 'charge': 3730.12, 'discountPct': 93.7}]}, 'accessorialCharges': {'accessorialCharge': [{'reqAccessorial': 'California Compliance Surcharge', 'accRate': 30.0, 'accCharge': 30.0}, {'reqAccessorial': 'Compliance Services Fee', 'accRate': 20.0, 'accCharge': 20.0}, {'reqAccessorial': 'Delivery Appointment Fee', 'accRate': 10.0, 'accCharge': 10.0}, {'reqAccessorial': 'Lift Gate Delivery', 'accRate': 0.0, 'accCharge': 50.0}, {'reqAccessorial': 'California Capacity Surcharge', 'accRate': 0.0, 'accCharge': 0.0}, {'reqAccessorial': 'Fuel Surcharge Western Region', 'accRate': 0.304, 'accCharge': 71.44}]}, 'totalCharges': {'grossCharge': 3730.12, 'fuelSurcharge': 71.44, 'totalAccessorial': 181.44, 'discountAmt': 3495.12, 'netCharge': 416.44}}}
+2024-08-23 10:36:08,791 ERROR:Error occurred while processing Auptix API: unsupported operand type(s) for /: 'int' and 'str'
+2024-08-23 10:36:08,792 INFO:127.0.0.1 - - [23/Aug/2024 10:36:08] "POST /process_form HTTP/1.1" 200 -
+2024-08-23 10:36:08,796 INFO:Data successfully written to data.json
+2024-08-23 10:36:59,230 INFO:[31m[1mWARNING: This is a development server. Do not use it in a production deployment. Use a production WSGI server instead.[0m
+ * Running on http://127.0.0.1:5000
+2024-08-23 10:36:59,230 INFO:[33mPress CTRL+C to quit[0m
+2024-08-23 10:37:15,204 INFO:127.0.0.1 - - [23/Aug/2024 10:37:15] "OPTIONS /process_form HTTP/1.1" 200 -
+2024-08-23 10:37:15,207 INFO:Received data: [{'so': '1', 'accessorials': 'Lift Gate Delivery,Appointment Fee', 'zip': '92126', 'pick_up_date': 45527, 'delivery_ServiceType': 'CALL_FOR_APPOINTMENT', 'locationType': 'BUSINESS_DOCK', 'hasPalletJackAndForklift': 'Yes', 'shipmentServiceType': 'WINDOW', 'cargoItems': [{'length': '48', 'width': '40', 'height': '80', 'weight': '200', 'palletNumber': '2'}], 'warehouseLocation': 'LA'}]
+2024-08-23 10:37:15,208 INFO:Processing SO: '1'
+2024-08-23 10:37:15,211 INFO:Sending Daylight request: {
+  "dyltRateQuoteReq": {
+    "accountNumber": "21818977",
+    "userName": "LINKTRANS",
+    "password": "daylight",
+    "billTerms": "PP",
+    "serviceType": "LTL",
+    "pickupDate": "2024-08-23",
+    "shipperInfo": {
+      "customerNumber": "21818977",
+      "customerName": "Linktrans",
+      "customerAddress": {
+        "streetAddress": "14650 Meyer Canyon Dr, DOCK 1203",
+        "aptAddress": "",
+        "city": "Fontana",
+        "state": "CA",
+        "zip": "92336"
+      }
+    },
+    "consigneeInfo": {
+      "customerNumber": "",
+      "customerName": "",
+      "customerAddress": {
+        "streetAddress": "",
+        "aptAddress": "",
+        "city": "",
+        "state": "",
+        "zip": "92126"
+      }
+    },
+    "items": {
+      "item": [
+        {
+          "description": "General Merchandise",
+          "nmfcNumber": "",
+          "nmfcSubNumber": "",
+          "pcs": 0,
+          "pallets": "2",
+          "weight": 400,
+          "actualClass": "300",
+          "dimensions": "48*40*80",
+          "freightClass": "CLASS_300"
+        }
+      ]
+    },
+    "accessorials": {
+      "accessorial": [
+        {
+          "accId": "Lift Gate Delivery",
+          "accName": "Delivery"
+        },
+        {
+          "accId": "Appointment Fee",
+          "accName": "Delivery"
+        }
+      ]
+    }
+  }
+}
+2024-08-23 10:37:17,904 INFO:Received Daylight response: {'dyltRateQuoteResp': {'success': 'YES', 'errorInformation': {'errorMessage': 'NULL'}, 'quoteNumber': 'CQ167304583', 'quoteDate': '08/23/2024', 'pickupDate': '08/23/2024', 'earliestDeliveryDate': '08/26/2024', 'totalWeight': 400, 'origZip': 92336, 'destZip': 92126, 'rateBaseName': 'DYLT507AW 2024-08-19', 'itemCharges': {'itemCharge': [{'description': 'General Merchandise', 'pcs': 0, 'pallets': 2, 'weight': 400, 'actualClass': 300, 'rateClass': 300, 'rate': 932.53, 'charge': 3730.12, 'discountPct': 93.7}]}, 'accessorialCharges': {'accessorialCharge': [{'reqAccessorial': 'California Capacity Surcharge', 'accRate': 0.0, 'accCharge': 0.0}, {'reqAccessorial': 'California Compliance Surcharge', 'accRate': 30.0, 'accCharge': 30.0}, {'reqAccessorial': 'Lift Gate Delivery', 'accRate': 0.0, 'accCharge': 50.0}, {'reqAccessorial': 'Fuel Surcharge Western Region', 'accRate': 0.304, 'accCharge': 71.44}, {'reqAccessorial': 'Compliance Services Fee', 'accRate': 20.0, 'accCharge': 20.0}, {'reqAccessorial': 'Delivery Appointment Fee', 'accRate': 10.0, 'accCharge': 10.0}]}, 'totalCharges': {'grossCharge': 3730.12, 'fuelSurcharge': 71.44, 'totalAccessorial': 181.44, 'discountAmt': 3495.12, 'netCharge': 416.44}}}
+2024-08-23 10:37:17,904 INFO:Sending Auptix request: {
+  "shipment": {
+    "pickupDate": "2024-08-23",
+    "pickUpStopDetails": {
+      "postalCode": "92336",
+      "locationType": "BUSINESS_DOCK",
+      "schedulingService": {
+        "type": "WINDOW",
+        "startTime": "09:00",
+        "endTime": "16:00"
+      }
+    },
+    "deliveryStopDetails": {
+      "postalCode": "92126",
+      "locationType": "BUSINESS_DOCK",
+      "hasPalletJackAndForklift": true,
+      "schedulingService": {
+        "type": "CALL_FOR_APPOINTMENT",
+        "date": "2024-08-23",
+        "startTime": "09:00",
+        "endTime": "16:00"
+      }
+    },
+    "shipmentItems": [
+      {
+        "quantity": "2",
+        "packagingType": "PALLET",
+        "dimensions": {
+          "lengthIn": 48,
+          "widthIn": 40,
+          "heightIn": 80
+        },
+        "stackable": false,
+        "turnable": true,
+        "totalWeightLbs": 400,
+        "freightClass": "CLASS_200",
+        "description": "General Merchandise"
+      }
+    ],
+    "additionalServices": {
+      "reeferProhibited": true
+    }
+  }
+}
+2024-08-23 10:37:30,079 INFO:Received Auptix response: {'guid': '567a2ede-fa0c-40d4-9105-585bd8afb347', 'referenceNumber': 'BSM-4MKT', 'expirationInstant': '2024-08-24T06:59:59Z', 'fulfillmentOptions': [{'guid': '060fac8d-bed1-4559-aaf0-fae92f3048d2', 'referenceNumber': 'BSM-4MKT-NX', 'totalRateUsd': '196.32', 'serviceLevel': 'STANDARD', 'pickupFlexibility': 'INFLEXIBLE', 'description': 'Standard, no pickup flexibility. Pickup: 8/23, Delivery: 8/26 - 8/27.', 'pickupRange': {'startDate': '2024-08-23', 'endDate': '2024-08-23'}, 'deliveryRange': {'startDate': '2024-08-26', 'endDate': '2024-08-27'}, 'transitTime': {'minDays': 1, 'maxDays': 2}}, {'guid': 'ff93556a-dc95-43c1-8951-b27ba783eae5', 'referenceNumber': 'BSM-4MKT-6S', 'totalRateUsd': '191.87', 'serviceLevel': 'STANDARD', 'pickupFlexibility': 'FLEXIBLE_1', 'description': 'Standard, 1-day pickup flexibility. Pickup: 8/23 - 8/26, Delivery: 8/26 - 8/28. Pickup can occur on any of the listed days.', 'pickupRange': {'startDate': '2024-08-23', 'endDate': '2024-08-26'}, 'deliveryRange': {'startDate': '2024-08-26', 'endDate': '2024-08-28'}, 'transitTime': {'minDays': 1, 'maxDays': 2}}, {'guid': 'ef6f0964-eeb4-4236-9e9e-5545e3311d20', 'referenceNumber': 'BSM-4MKT-Y8', 'totalRateUsd': '189.87', 'serviceLevel': 'STANDARD', 'pickupFlexibility': 'FLEXIBLE_2', 'description': 'Standard, 2-day pickup flexibility. Pickup: 8/23 - 8/27, Delivery: 8/26 - 8/29. Pickup can occur on any of the listed days.', 'pickupRange': {'startDate': '2024-08-23', 'endDate': '2024-08-27'}, 'deliveryRange': {'startDate': '2024-08-26', 'endDate': '2024-08-29'}, 'transitTime': {'minDays': 1, 'maxDays': 2}}, {'guid': '9775948f-53cc-4e34-b877-01090e6f9315', 'referenceNumber': 'BSM-4MKT-X6', 'totalRateUsd': '336.00', 'serviceLevel': 'FLOCK_DIRECT', 'pickupFlexibility': 'INFLEXIBLE', 'description': 'Flock Direct, no pickup flexibility. Pickup: 8/26, Delivery: 8/27.', 'pickupRange': {'startDate': '2024-08-26', 'endDate': '2024-08-26'}, 'deliveryRange': {'startDate': '2024-08-27', 'endDate': '2024-08-27'}, 'transitTime': {'minDays': 1, 'maxDays': 1}}, {'guid': '780a79a4-ace9-4164-8d35-97c5cd73f126', 'referenceNumber': 'BSM-4MKT-BC', 'totalRateUsd': '320.00', 'serviceLevel': 'FLOCK_DIRECT', 'pickupFlexibility': 'FLEXIBLE_1', 'description': 'Flock Direct, 1-day pickup flexibility. Pickup: 8/26 - 8/27, Delivery: 8/28. Pickup can occur on any of the listed days.', 'pickupRange': {'startDate': '2024-08-26', 'endDate': '2024-08-27'}, 'deliveryRange': {'startDate': '2024-08-28', 'endDate': '2024-08-28'}, 'transitTime': {'minDays': 1, 'maxDays': 1}}, {'guid': 'e78977c2-b045-4e21-8759-a08ebf48f97b', 'referenceNumber': 'BSM-4MKT-V7', 'totalRateUsd': '315.00', 'serviceLevel': 'FLOCK_DIRECT', 'pickupFlexibility': 'FLEXIBLE_2', 'description': 'Flock Direct, 2-day pickup flexibility. Pickup: 8/26 - 8/28, Delivery: 8/29. Pickup can occur on any of the listed days.', 'pickupRange': {'startDate': '2024-08-26', 'endDate': '2024-08-28'}, 'deliveryRange': {'startDate': '2024-08-29', 'endDate': '2024-08-29'}, 'transitTime': {'minDays': 1, 'maxDays': 1}}], 'shipment': {'pickupDate': '2024-08-23', 'pickUpStopDetails': {'postalCode': '92336', 'locationType': 'BUSINESS_DOCK', 'liftgateRequired': False, 'insideStop': False, 'hasPalletJackAndForklift': False, 'schedulingService': {'type': 'WINDOW', 'startTime': '09:00:00', 'endTime': '16:00:00'}}, 'deliveryStopDetails': {'postalCode': '92126', 'locationType': 'BUSINESS_DOCK', 'liftgateRequired': False, 'insideStop': False, 'hasPalletJackAndForklift': True, 'schedulingService': {'type': 'CALL_FOR_APPOINTMENT'}}, 'linearFootage': 4, 'shipmentItems': [{'quantity': 2, 'packagingType': 'PALLET', 'dimensions': {'widthIn': 40, 'lengthIn': 48, 'heightIn': 80}, 'freightClass': 'CLASS_200', 'stackable': False, 'turnable': True, 'totalWeightLbs': 400, 'description': 'General Merchandise'}], 'additionalServices': {'blockAndBraceRequired': False, 'exclusiveUseRequired': False, 'loadBarCount': 0, 'strapCount': 0, 'unloadingServicesRequired': False, 'blindShipmentCoordinationRequired': False, 'loadToRideRequired': False, 'foodGradeTrailerRequired': False, 'dryVanProhibited': False, 'reeferProhibited': True, 'straightTruckProhibited': False, 'sprinterVanProhibited': False, 'insuredAmountUsd': None}}}
+2024-08-23 10:37:30,080 INFO:127.0.0.1 - - [23/Aug/2024 10:37:30] "POST /process_form HTTP/1.1" 200 -
+2024-08-23 10:37:30,084 INFO:Data successfully written to data.json
+2024-08-23 10:38:16,570 INFO:[31m[1mWARNING: This is a development server. Do not use it in a production deployment. Use a production WSGI server instead.[0m
+ * Running on http://127.0.0.1:5000
+2024-08-23 10:38:16,570 INFO:[33mPress CTRL+C to quit[0m
+2024-08-23 10:38:33,310 INFO:127.0.0.1 - - [23/Aug/2024 10:38:33] "OPTIONS /process_form HTTP/1.1" 200 -
+2024-08-23 10:38:33,315 INFO:Received data: [{'so': '1', 'accessorials': 'Lift Gate Delivery,Appointment Fee', 'zip': '92126', 'pick_up_date': 45527, 'delivery_ServiceType': 'CALL_FOR_APPOINTMENT', 'locationType': 'BUSINESS_DOCK', 'hasPalletJackAndForklift': 'Yes', 'shipmentServiceType': 'WINDOW', 'cargoItems': [{'length': '48', 'width': '40', 'height': '80', 'weight': '200', 'palletNumber': '2'}], 'warehouseLocation': 'LA'}]
+2024-08-23 10:38:33,316 INFO:Processing SO: '1'
+2024-08-23 10:38:33,318 INFO:Sending Daylight request: {
+  "dyltRateQuoteReq": {
+    "accountNumber": "21818977",
+    "userName": "LINKTRANS",
+    "password": "daylight",
+    "billTerms": "PP",
+    "serviceType": "LTL",
+    "pickupDate": "2024-08-23",
+    "shipperInfo": {
+      "customerNumber": "21818977",
+      "customerName": "Linktrans",
+      "customerAddress": {
+        "streetAddress": "14650 Meyer Canyon Dr, DOCK 1203",
+        "aptAddress": "",
+        "city": "Fontana",
+        "state": "CA",
+        "zip": "92336"
+      }
+    },
+    "consigneeInfo": {
+      "customerNumber": "",
+      "customerName": "",
+      "customerAddress": {
+        "streetAddress": "",
+        "aptAddress": "",
+        "city": "",
+        "state": "",
+        "zip": "92126"
+      }
+    },
+    "items": {
+      "item": [
+        {
+          "description": "General Merchandise",
+          "nmfcNumber": "",
+          "nmfcSubNumber": "",
+          "pcs": 0,
+          "pallets": "2",
+          "weight": 400,
+          "actualClass": "300",
+          "dimensions": "48*40*80",
+          "freightClass": "CLASS_300"
+        }
+      ]
+    },
+    "accessorials": {
+      "accessorial": [
+        {
+          "accId": "Lift Gate Delivery",
+          "accName": "Delivery"
+        },
+        {
+          "accId": "Appointment Fee",
+          "accName": "Delivery"
+        }
+      ]
+    }
+  }
+}
+2024-08-23 10:38:35,640 INFO:Received Daylight response: {'dyltRateQuoteResp': {'success': 'YES', 'errorInformation': {'errorMessage': 'NULL'}, 'quoteNumber': 'CQ167304926', 'quoteDate': '08/23/2024', 'pickupDate': '08/23/2024', 'earliestDeliveryDate': '08/26/2024', 'totalWeight': 400, 'origZip': 92336, 'destZip': 92126, 'rateBaseName': 'DYLT507AW 2024-08-19', 'itemCharges': {'itemCharge': [{'description': 'General Merchandise', 'pcs': 0, 'pallets': 2, 'weight': 400, 'actualClass': 300, 'rateClass': 300, 'rate': 932.53, 'charge': 3730.12, 'discountPct': 93.7}]}, 'accessorialCharges': {'accessorialCharge': [{'reqAccessorial': 'California Capacity Surcharge', 'accRate': 0.0, 'accCharge': 0.0}, {'reqAccessorial': 'California Compliance Surcharge', 'accRate': 30.0, 'accCharge': 30.0}, {'reqAccessorial': 'Compliance Services Fee', 'accRate': 20.0, 'accCharge': 20.0}, {'reqAccessorial': 'Delivery Appointment Fee', 'accRate': 10.0, 'accCharge': 10.0}, {'reqAccessorial': 'Lift Gate Delivery', 'accRate': 0.0, 'accCharge': 50.0}, {'reqAccessorial': 'Fuel Surcharge Western Region', 'accRate': 0.304, 'accCharge': 71.44}]}, 'totalCharges': {'grossCharge': 3730.12, 'fuelSurcharge': 71.44, 'totalAccessorial': 181.44, 'discountAmt': 3495.12, 'netCharge': 416.44}}}
+2024-08-23 10:38:35,640 INFO:Sending Auptix request: {
+  "shipment": {
+    "pickupDate": "2024-08-23",
+    "pickUpStopDetails": {
+      "postalCode": "92336",
+      "locationType": "BUSINESS_DOCK",
+      "schedulingService": {
+        "type": "WINDOW",
+        "startTime": "09:00",
+        "endTime": "16:00"
+      }
+    },
+    "deliveryStopDetails": {
+      "postalCode": "92126",
+      "locationType": "BUSINESS_DOCK",
+      "hasPalletJackAndForklift": true,
+      "schedulingService": {
+        "type": "CALL_FOR_APPOINTMENT",
+        "date": "2024-08-23",
+        "startTime": "09:00",
+        "endTime": "16:00"
+      }
+    },
+    "shipmentItems": [
+      {
+        "quantity": "2",
+        "packagingType": "PALLET",
+        "dimensions": {
+          "lengthIn": 48,
+          "widthIn": 40,
+          "heightIn": 80
+        },
+        "stackable": false,
+        "turnable": true,
+        "totalWeightLbs": 200.0,
+        "freightClass": "CLASS_200",
+        "description": "General Merchandise"
+      }
+    ],
+    "additionalServices": {
+      "reeferProhibited": true
+    }
+  }
+}
+2024-08-23 10:38:46,449 INFO:Received Auptix response: {'guid': '9d0a1a3f-f846-46b2-b2cb-544bd097cfdd', 'referenceNumber': 'F92-GHBD', 'expirationInstant': '2024-08-24T06:59:59Z', 'fulfillmentOptions': [{'guid': '22b32554-242d-4440-9414-b7923e685d32', 'referenceNumber': 'F92-GHBD-QS', 'totalRateUsd': '180.20', 'serviceLevel': 'STANDARD', 'pickupFlexibility': 'INFLEXIBLE', 'description': 'Standard, no pickup flexibility. Pickup: 8/23, Delivery: 8/27.', 'pickupRange': {'startDate': '2024-08-23', 'endDate': '2024-08-23'}, 'deliveryRange': {'startDate': '2024-08-27', 'endDate': '2024-08-27'}, 'transitTime': {'minDays': 2, 'maxDays': 2}}, {'guid': 'b9b60574-d875-49dd-8465-c540cb8d3f31', 'referenceNumber': 'F92-GHBD-WX', 'totalRateUsd': '175.90', 'serviceLevel': 'STANDARD', 'pickupFlexibility': 'FLEXIBLE_1', 'description': 'Standard, 1-day pickup flexibility. Pickup: 8/23 - 8/26, Delivery: 8/27 - 8/28. Pickup can occur on any of the listed days.', 'pickupRange': {'startDate': '2024-08-23', 'endDate': '2024-08-26'}, 'deliveryRange': {'startDate': '2024-08-27', 'endDate': '2024-08-28'}, 'transitTime': {'minDays': 2, 'maxDays': 2}}, {'guid': 'ab541d79-04a6-47f0-831d-015203e9179b', 'referenceNumber': 'F92-GHBD-75', 'totalRateUsd': '173.90', 'serviceLevel': 'STANDARD', 'pickupFlexibility': 'FLEXIBLE_2', 'description': 'Standard, 2-day pickup flexibility. Pickup: 8/23 - 8/27, Delivery: 8/27 - 8/29. Pickup can occur on any of the listed days.', 'pickupRange': {'startDate': '2024-08-23', 'endDate': '2024-08-27'}, 'deliveryRange': {'startDate': '2024-08-27', 'endDate': '2024-08-29'}, 'transitTime': {'minDays': 2, 'maxDays': 2}}, {'guid': '83868a83-f442-4416-894d-64d304fc90e3', 'referenceNumber': 'F92-GHBD-X4', 'totalRateUsd': '335.00', 'serviceLevel': 'FLOCK_DIRECT', 'pickupFlexibility': 'INFLEXIBLE', 'description': 'Flock Direct, no pickup flexibility. Pickup: 8/26, Delivery: 8/27.', 'pickupRange': {'startDate': '2024-08-26', 'endDate': '2024-08-26'}, 'deliveryRange': {'startDate': '2024-08-27', 'endDate': '2024-08-27'}, 'transitTime': {'minDays': 1, 'maxDays': 1}}, {'guid': '6a87cd4e-1eae-455c-9be2-7cd02f777531', 'referenceNumber': 'F92-GHBD-LF', 'totalRateUsd': '319.00', 'serviceLevel': 'FLOCK_DIRECT', 'pickupFlexibility': 'FLEXIBLE_1', 'description': 'Flock Direct, 1-day pickup flexibility. Pickup: 8/26 - 8/27, Delivery: 8/28. Pickup can occur on any of the listed days.', 'pickupRange': {'startDate': '2024-08-26', 'endDate': '2024-08-27'}, 'deliveryRange': {'startDate': '2024-08-28', 'endDate': '2024-08-28'}, 'transitTime': {'minDays': 1, 'maxDays': 1}}, {'guid': '015c8a09-5a2a-4137-a440-4bf3c79e4493', 'referenceNumber': 'F92-GHBD-YB', 'totalRateUsd': '315.00', 'serviceLevel': 'FLOCK_DIRECT', 'pickupFlexibility': 'FLEXIBLE_2', 'description': 'Flock Direct, 2-day pickup flexibility. Pickup: 8/26 - 8/28, Delivery: 8/29. Pickup can occur on any of the listed days.', 'pickupRange': {'startDate': '2024-08-26', 'endDate': '2024-08-28'}, 'deliveryRange': {'startDate': '2024-08-29', 'endDate': '2024-08-29'}, 'transitTime': {'minDays': 1, 'maxDays': 1}}], 'shipment': {'pickupDate': '2024-08-23', 'pickUpStopDetails': {'postalCode': '92336', 'locationType': 'BUSINESS_DOCK', 'liftgateRequired': False, 'insideStop': False, 'hasPalletJackAndForklift': False, 'schedulingService': {'type': 'WINDOW', 'startTime': '09:00:00', 'endTime': '16:00:00'}}, 'deliveryStopDetails': {'postalCode': '92126', 'locationType': 'BUSINESS_DOCK', 'liftgateRequired': False, 'insideStop': False, 'hasPalletJackAndForklift': True, 'schedulingService': {'type': 'CALL_FOR_APPOINTMENT'}}, 'linearFootage': 4, 'shipmentItems': [{'quantity': 2, 'packagingType': 'PALLET', 'dimensions': {'widthIn': 40, 'lengthIn': 48, 'heightIn': 80}, 'freightClass': 'CLASS_200', 'stackable': False, 'turnable': True, 'totalWeightLbs': 200, 'description': 'General Merchandise'}], 'additionalServices': {'blockAndBraceRequired': False, 'exclusiveUseRequired': False, 'loadBarCount': 0, 'strapCount': 0, 'unloadingServicesRequired': False, 'blindShipmentCoordinationRequired': False, 'loadToRideRequired': False, 'foodGradeTrailerRequired': False, 'dryVanProhibited': False, 'reeferProhibited': True, 'straightTruckProhibited': False, 'sprinterVanProhibited': False, 'insuredAmountUsd': None}}}
+2024-08-23 10:38:46,450 INFO:127.0.0.1 - - [23/Aug/2024 10:38:46] "POST /process_form HTTP/1.1" 200 -
+2024-08-23 10:38:46,455 INFO:Data successfully written to data.json
+2024-08-23 10:39:14,647 INFO:127.0.0.1 - - [23/Aug/2024 10:39:14] "OPTIONS /process_form HTTP/1.1" 200 -
+2024-08-23 10:39:14,649 INFO:Received data: [{'so': '990240700029053', 'accessorials': 'Appointment Fee, Lift Gate Delivery', 'zip': '28805', 'pick_up_date': 45527, 'delivery_ServiceType': 'CALL_FOR_APPOINTMENT', 'locationType': 'BUSINESS_NO_DOCK', 'hasPalletJackAndForklift': 'True', 'shipmentServiceType': 'WINDOW', 'warehouseLocation': 'LA', 'cargoItems': [{'length': 53, 'width': 27, 'height': 30, 'weight': 137, 'palletNumber': 2}, {'length': 53, 'width': 27, 'height': 30, 'weight': 137, 'palletNumber': '1'}]}]
+2024-08-23 10:39:14,650 INFO:Processing SO: '990240700029053'
+2024-08-23 10:39:14,650 INFO:Sending Daylight request: {
+  "dyltRateQuoteReq": {
+    "accountNumber": "21818977",
+    "userName": "LINKTRANS",
+    "password": "daylight",
+    "billTerms": "PP",
+    "serviceType": "LTL",
+    "pickupDate": "2024-08-23",
+    "shipperInfo": {
+      "customerNumber": "21818977",
+      "customerName": "Linktrans",
+      "customerAddress": {
+        "streetAddress": "14650 Meyer Canyon Dr, DOCK 1203",
+        "aptAddress": "",
+        "city": "Fontana",
+        "state": "CA",
+        "zip": "92336"
+      }
+    },
+    "consigneeInfo": {
+      "customerNumber": "",
+      "customerName": "",
+      "customerAddress": {
+        "streetAddress": "",
+        "aptAddress": "",
+        "city": "",
+        "state": "",
+        "zip": "28805"
+      }
+    },
+    "items": {
+      "item": [
+        {
+          "description": "General Merchandise",
+          "nmfcNumber": "",
+          "nmfcSubNumber": "",
+          "pcs": 0,
+          "pallets": 2,
+          "weight": 274,
+          "actualClass": "175",
+          "dimensions": "53*27*30",
+          "freightClass": "CLASS_175"
+        },
+        {
+          "description": "General Merchandise",
+          "nmfcNumber": "",
+          "nmfcSubNumber": "",
+          "pcs": 0,
+          "pallets": "1",
+          "weight": 137,
+          "actualClass": "175",
+          "dimensions": "53*27*30",
+          "freightClass": "CLASS_175"
+        }
+      ]
+    },
+    "accessorials": {
+      "accessorial": [
+        {
+          "accId": "Appointment Fee",
+          "accName": "Delivery"
+        },
+        {
+          "accId": "Lift Gate Delivery",
+          "accName": "Delivery"
+        }
+      ]
+    }
+  }
+}
+2024-08-23 10:39:17,959 INFO:Received Daylight response: {'dyltRateQuoteResp': {'success': 'YES', 'errorInformation': {'errorMessage': 'NULL'}, 'quoteNumber': 'CQ167305127', 'quoteDate': '08/23/2024', 'pickupDate': '08/23/2024', 'earliestDeliveryDate': '08/27/2024', 'totalWeight': 411, 'origZip': 92336, 'destZip': 28805, 'rateBaseName': 'DYLT507AW 2024-08-19', 'itemCharges': {'itemCharge': [{'description': 'General Merchandise', 'pcs': 0, 'pallets': 2, 'weight': 274, 'actualClass': 175, 'rateClass': 175, 'rate': 1342.66, 'charge': 3678.89, 'discountPct': 93.7}, {'description': 'General Merchandise', 'pcs': 0, 'pallets': 1, 'weight': 137, 'actualClass': 175, 'rateClass': 175, 'rate': 1342.66, 'charge': 1839.44, 'discountPct': 93.7}, {'description': 'Weight Deficit', 'weight': 89, 'rate': 1342.66, 'charge': 1194.97, 'discountPct': 93.7}]}, 'accessorialCharges': {'accessorialCharge': [{'reqAccessorial': 'Delivery Appointment Fee', 'accRate': 10.0, 'accCharge': 10.0}, {'reqAccessorial': 'Lift Gate Delivery', 'accRate': 0.0, 'accCharge': 50.0}, {'reqAccessorial': 'Fuel Surcharge', 'accRate': 0.271, 'accCharge': 114.614}, {'reqAccessorial': 'California Capacity Surcharge', 'accRate': 0.0, 'accCharge': 0.0}, {'reqAccessorial': 'California Compliance Surcharge', 'accRate': 30.0, 'accCharge': 30.0}, {'reqAccessorial': 'Compliance Services Fee', 'accRate': 20.0, 'accCharge': 20.0}]}, 'totalCharges': {'grossCharge': 6713.3, 'fuelSurcharge': 114.614, 'totalAccessorial': 224.61, 'discountAmt': 6290.37, 'netCharge': 647.54}}}
+2024-08-23 10:39:17,960 INFO:Sending Auptix request: {
+  "shipment": {
+    "pickupDate": "2024-08-23",
+    "pickUpStopDetails": {
+      "postalCode": "92336",
+      "locationType": "BUSINESS_DOCK",
+      "schedulingService": {
+        "type": "WINDOW",
+        "startTime": "09:00",
+        "endTime": "16:00"
+      }
+    },
+    "deliveryStopDetails": {
+      "postalCode": "28805",
+      "locationType": "BUSINESS_NO_DOCK",
+      "hasPalletJackAndForklift": true,
+      "schedulingService": {
+        "type": "CALL_FOR_APPOINTMENT",
+        "date": "2024-08-23",
+        "startTime": "09:00",
+        "endTime": "16:00"
+      }
+    },
+    "shipmentItems": [
+      {
+        "quantity": "2",
+        "packagingType": "PALLET",
+        "dimensions": {
+          "lengthIn": 53,
+          "widthIn": 27,
+          "heightIn": 30
+        },
+        "stackable": false,
+        "turnable": true,
+        "totalWeightLbs": 137.0,
+        "freightClass": "CLASS_92_5",
+        "description": "General Merchandise"
+      },
+      {
+        "quantity": "1",
+        "packagingType": "PALLET",
+        "dimensions": {
+          "lengthIn": 53,
+          "widthIn": 27,
+          "heightIn": 30
+        },
+        "stackable": false,
+        "turnable": true,
+        "totalWeightLbs": 137.0,
+        "freightClass": "CLASS_175",
+        "description": "General Merchandise"
+      }
+    ],
+    "additionalServices": {
+      "reeferProhibited": true
+    }
+  }
+}
+2024-08-23 10:39:29,404 INFO:Received Auptix response: {'guid': '97dee55e-bd10-48bb-98ee-9d7313c24642', 'referenceNumber': 'QQ4-XWVY', 'expirationInstant': '2024-08-24T06:59:59Z', 'fulfillmentOptions': [{'guid': 'ae74525c-0b09-49c0-a4ec-088fd30dc250', 'referenceNumber': 'QQ4-XWVY-23', 'totalRateUsd': '316.56', 'serviceLevel': 'STANDARD', 'pickupFlexibility': 'INFLEXIBLE', 'description': 'Standard, no pickup flexibility. Pickup: 8/23, Delivery: 8/30 - 9/5.', 'pickupRange': {'startDate': '2024-08-23', 'endDate': '2024-08-23'}, 'deliveryRange': {'startDate': '2024-08-30', 'endDate': '2024-09-05'}, 'transitTime': {'minDays': 5, 'maxDays': 8}}, {'guid': '1e92e0c0-c674-4da6-a2ef-573683aa3c3d', 'referenceNumber': 'QQ4-XWVY-XF', 'totalRateUsd': '312.15', 'serviceLevel': 'STANDARD', 'pickupFlexibility': 'FLEXIBLE_1', 'description': 'Standard, 1-day pickup flexibility. Pickup: 8/23 - 8/26, Delivery: 8/30 - 9/6. Pickup can occur on any of the listed days.', 'pickupRange': {'startDate': '2024-08-23', 'endDate': '2024-08-26'}, 'deliveryRange': {'startDate': '2024-08-30', 'endDate': '2024-09-06'}, 'transitTime': {'minDays': 5, 'maxDays': 8}}, {'guid': 'f3fe5b76-f52d-4fe5-b870-6c38833091b8', 'referenceNumber': 'QQ4-XWVY-WL', 'totalRateUsd': '310.00', 'serviceLevel': 'STANDARD', 'pickupFlexibility': 'FLEXIBLE_2', 'description': 'Standard, 2-day pickup flexibility. Pickup: 8/23 - 8/27, Delivery: 8/30 - 9/9. Pickup can occur on any of the listed days.', 'pickupRange': {'startDate': '2024-08-23', 'endDate': '2024-08-27'}, 'deliveryRange': {'startDate': '2024-08-30', 'endDate': '2024-09-09'}, 'transitTime': {'minDays': 5, 'maxDays': 8}}, {'guid': '07053e08-84d4-45b9-9c7a-ff1630020436', 'referenceNumber': 'QQ4-XWVY-7M', 'totalRateUsd': '1983.00', 'serviceLevel': 'FLOCK_DIRECT', 'pickupFlexibility': 'INFLEXIBLE', 'description': 'Flock Direct, no pickup flexibility. Pickup: 8/26, Delivery: 9/3.', 'pickupRange': {'startDate': '2024-08-26', 'endDate': '2024-08-26'}, 'deliveryRange': {'startDate': '2024-09-03', 'endDate': '2024-09-03'}, 'transitTime': {'minDays': 5, 'maxDays': 5}}, {'guid': 'b8b8000e-1ca8-4ab6-bdec-63e8eb5a8c37', 'referenceNumber': 'QQ4-XWVY-HT', 'totalRateUsd': '1919.00', 'serviceLevel': 'FLOCK_DIRECT', 'pickupFlexibility': 'FLEXIBLE_1', 'description': 'Flock Direct, 1-day pickup flexibility. Pickup: 8/26 - 8/27, Delivery: 9/3. Pickup can occur on any of the listed days.', 'pickupRange': {'startDate': '2024-08-26', 'endDate': '2024-08-27'}, 'deliveryRange': {'startDate': '2024-09-03', 'endDate': '2024-09-03'}, 'transitTime': {'minDays': 5, 'maxDays': 5}}, {'guid': 'ac78b706-15c0-4990-85b5-979fc4d116e1', 'referenceNumber': 'QQ4-XWVY-M7', 'totalRateUsd': '1905.00', 'serviceLevel': 'FLOCK_DIRECT', 'pickupFlexibility': 'FLEXIBLE_2', 'description': 'Flock Direct, 2-day pickup flexibility. Pickup: 8/26 - 8/28, Delivery: 9/3. Pickup can occur on any of the listed days.', 'pickupRange': {'startDate': '2024-08-26', 'endDate': '2024-08-28'}, 'deliveryRange': {'startDate': '2024-09-03', 'endDate': '2024-09-03'}, 'transitTime': {'minDays': 5, 'maxDays': 5}}], 'shipment': {'pickupDate': '2024-08-23', 'pickUpStopDetails': {'postalCode': '92336', 'locationType': 'BUSINESS_DOCK', 'liftgateRequired': False, 'insideStop': False, 'hasPalletJackAndForklift': False, 'schedulingService': {'type': 'WINDOW', 'startTime': '09:00:00', 'endTime': '16:00:00'}}, 'deliveryStopDetails': {'postalCode': '28805', 'locationType': 'BUSINESS_NO_DOCK', 'liftgateRequired': False, 'insideStop': False, 'hasPalletJackAndForklift': True, 'schedulingService': {'type': 'CALL_FOR_APPOINTMENT'}}, 'linearFootage': 5, 'shipmentItems': [{'quantity': 2, 'packagingType': 'PALLET', 'dimensions': {'widthIn': 27, 'lengthIn': 53, 'heightIn': 30}, 'freightClass': 'CLASS_92_5', 'stackable': False, 'turnable': True, 'totalWeightLbs': 137, 'description': 'General Merchandise'}, {'quantity': 1, 'packagingType': 'PALLET', 'dimensions': {'widthIn': 27, 'lengthIn': 53, 'heightIn': 30}, 'freightClass': 'CLASS_175', 'stackable': False, 'turnable': True, 'totalWeightLbs': 137, 'description': 'General Merchandise'}], 'additionalServices': {'blockAndBraceRequired': False, 'exclusiveUseRequired': False, 'loadBarCount': 0, 'strapCount': 0, 'unloadingServicesRequired': False, 'blindShipmentCoordinationRequired': False, 'loadToRideRequired': False, 'foodGradeTrailerRequired': False, 'dryVanProhibited': False, 'reeferProhibited': True, 'straightTruckProhibited': False, 'sprinterVanProhibited': False, 'insuredAmountUsd': None}}}
+2024-08-23 10:39:29,405 INFO:127.0.0.1 - - [23/Aug/2024 10:39:29] "POST /process_form HTTP/1.1" 200 -
+2024-08-23 10:39:29,409 INFO:Data successfully written to data.json
+2024-08-23 10:41:12,635 INFO:[31m[1mWARNING: This is a development server. Do not use it in a production deployment. Use a production WSGI server instead.[0m
+ * Running on http://127.0.0.1:5000
+2024-08-23 10:41:12,635 INFO:[33mPress CTRL+C to quit[0m
+2024-08-23 10:41:15,842 INFO:127.0.0.1 - - [23/Aug/2024 10:41:15] "OPTIONS /process_form HTTP/1.1" 200 -
+2024-08-23 10:41:15,845 INFO:Received data: [{'so': '990240700029053', 'accessorials': 'Appointment Fee, Lift Gate Delivery', 'zip': '28805', 'pick_up_date': 45527, 'delivery_ServiceType': 'CALL_FOR_APPOINTMENT', 'locationType': 'BUSINESS_NO_DOCK', 'hasPalletJackAndForklift': 'True', 'shipmentServiceType': 'WINDOW', 'warehouseLocation': 'LA', 'cargoItems': [{'length': 53, 'width': 27, 'height': 30, 'weight': 137, 'palletNumber': 2}, {'length': 53, 'width': 27, 'height': 30, 'weight': 137, 'palletNumber': '1'}]}]
+2024-08-23 10:41:15,845 INFO:Processing SO: '990240700029053'
+2024-08-23 10:41:15,846 INFO:Sending Daylight request: {
+  "dyltRateQuoteReq": {
+    "accountNumber": "21818977",
+    "userName": "LINKTRANS",
+    "password": "daylight",
+    "billTerms": "PP",
+    "serviceType": "LTL",
+    "pickupDate": "2024-08-23",
+    "shipperInfo": {
+      "customerNumber": "21818977",
+      "customerName": "Linktrans",
+      "customerAddress": {
+        "streetAddress": "14650 Meyer Canyon Dr, DOCK 1203",
+        "aptAddress": "",
+        "city": "Fontana",
+        "state": "CA",
+        "zip": "92336"
+      }
+    },
+    "consigneeInfo": {
+      "customerNumber": "",
+      "customerName": "",
+      "customerAddress": {
+        "streetAddress": "",
+        "aptAddress": "",
+        "city": "",
+        "state": "",
+        "zip": "28805"
+      }
+    },
+    "items": {
+      "item": [
+        {
+          "description": "General Merchandise",
+          "nmfcNumber": "",
+          "nmfcSubNumber": "",
+          "pcs": 0,
+          "pallets": 2,
+          "weight": 274,
+          "actualClass": "175",
+          "dimensions": "53*27*30",
+          "freightClass": "CLASS_175"
+        },
+        {
+          "description": "General Merchandise",
+          "nmfcNumber": "",
+          "nmfcSubNumber": "",
+          "pcs": 0,
+          "pallets": "1",
+          "weight": 137,
+          "actualClass": "175",
+          "dimensions": "53*27*30",
+          "freightClass": "CLASS_175"
+        }
+      ]
+    },
+    "accessorials": {
+      "accessorial": [
+        {
+          "accId": "Appointment Fee",
+          "accName": "Delivery"
+        },
+        {
+          "accId": "Lift Gate Delivery",
+          "accName": "Delivery"
+        }
+      ]
+    }
+  }
+}
+2024-08-23 10:41:19,168 INFO:Received Daylight response: {'dyltRateQuoteResp': {'success': 'YES', 'errorInformation': {'errorMessage': 'NULL'}, 'quoteNumber': 'CQ167305640', 'quoteDate': '08/23/2024', 'pickupDate': '08/23/2024', 'earliestDeliveryDate': '08/27/2024', 'totalWeight': 411, 'origZip': 92336, 'destZip': 28805, 'rateBaseName': 'DYLT507AW 2024-08-19', 'itemCharges': {'itemCharge': [{'description': 'General Merchandise', 'pcs': 0, 'pallets': 2, 'weight': 274, 'actualClass': 175, 'rateClass': 175, 'rate': 1342.66, 'charge': 3678.89, 'discountPct': 93.7}, {'description': 'General Merchandise', 'pcs': 0, 'pallets': 1, 'weight': 137, 'actualClass': 175, 'rateClass': 175, 'rate': 1342.66, 'charge': 1839.44, 'discountPct': 93.7}, {'description': 'Weight Deficit', 'weight': 89, 'rate': 1342.66, 'charge': 1194.97, 'discountPct': 93.7}]}, 'accessorialCharges': {'accessorialCharge': [{'reqAccessorial': 'Lift Gate Delivery', 'accRate': 0.0, 'accCharge': 50.0}, {'reqAccessorial': 'California Capacity Surcharge', 'accRate': 0.0, 'accCharge': 0.0}, {'reqAccessorial': 'California Compliance Surcharge', 'accRate': 30.0, 'accCharge': 30.0}, {'reqAccessorial': 'Compliance Services Fee', 'accRate': 20.0, 'accCharge': 20.0}, {'reqAccessorial': 'Delivery Appointment Fee', 'accRate': 10.0, 'accCharge': 10.0}, {'reqAccessorial': 'Fuel Surcharge', 'accRate': 0.271, 'accCharge': 114.614}]}, 'totalCharges': {'grossCharge': 6713.3, 'fuelSurcharge': 114.614, 'totalAccessorial': 224.61, 'discountAmt': 6290.37, 'netCharge': 647.54}}}
+2024-08-23 10:41:19,169 INFO:Sending Auptix request: {
+  "shipment": {
+    "pickupDate": "2024-08-23",
+    "pickUpStopDetails": {
+      "postalCode": "92336",
+      "locationType": "BUSINESS_DOCK",
+      "schedulingService": {
+        "type": "WINDOW",
+        "startTime": "09:00",
+        "endTime": "16:00"
+      }
+    },
+    "deliveryStopDetails": {
+      "postalCode": "28805",
+      "locationType": "BUSINESS_NO_DOCK",
+      "hasPalletJackAndForklift": true,
+      "schedulingService": {
+        "type": "CALL_FOR_APPOINTMENT",
+        "date": "2024-08-23",
+        "startTime": "09:00",
+        "endTime": "16:00"
+      }
+    },
+    "shipmentItems": [
+      {
+        "quantity": "2",
+        "packagingType": "PALLET",
+        "dimensions": {
+          "lengthIn": 53,
+          "widthIn": 27,
+          "heightIn": 30
+        },
+        "stackable": false,
+        "turnable": true,
+        "totalWeightLbs": 137,
+        "freightClass": "CLASS_92_5",
+        "description": "General Merchandise"
+      },
+      {
+        "quantity": "1",
+        "packagingType": "PALLET",
+        "dimensions": {
+          "lengthIn": 53,
+          "widthIn": 27,
+          "heightIn": 30
+        },
+        "stackable": false,
+        "turnable": true,
+        "totalWeightLbs": 137,
+        "freightClass": "CLASS_175",
+        "description": "General Merchandise"
+      }
+    ],
+    "additionalServices": {
+      "reeferProhibited": true
+    }
+  }
+}
+2024-08-23 10:41:31,519 INFO:Received Auptix response: {'guid': 'b37c9558-44a7-4a52-bb06-0b3351ec8bf0', 'referenceNumber': 'F96-MQX5', 'expirationInstant': '2024-08-24T06:59:59Z', 'fulfillmentOptions': [{'guid': 'a092f70f-638e-473d-a625-56e47fc0e793', 'referenceNumber': 'F96-MQX5-BP', 'totalRateUsd': '316.56', 'serviceLevel': 'STANDARD', 'pickupFlexibility': 'INFLEXIBLE', 'description': 'Standard, no pickup flexibility. Pickup: 8/23, Delivery: 8/30 - 9/5.', 'pickupRange': {'startDate': '2024-08-23', 'endDate': '2024-08-23'}, 'deliveryRange': {'startDate': '2024-08-30', 'endDate': '2024-09-05'}, 'transitTime': {'minDays': 5, 'maxDays': 8}}, {'guid': 'cd8e964f-ee03-4238-ba29-fcc0af8279ed', 'referenceNumber': 'F96-MQX5-46', 'totalRateUsd': '312.15', 'serviceLevel': 'STANDARD', 'pickupFlexibility': 'FLEXIBLE_1', 'description': 'Standard, 1-day pickup flexibility. Pickup: 8/23 - 8/26, Delivery: 8/30 - 9/6. Pickup can occur on any of the listed days.', 'pickupRange': {'startDate': '2024-08-23', 'endDate': '2024-08-26'}, 'deliveryRange': {'startDate': '2024-08-30', 'endDate': '2024-09-06'}, 'transitTime': {'minDays': 5, 'maxDays': 8}}, {'guid': '33f1fb50-96a0-4262-93eb-ac6faab57c48', 'referenceNumber': 'F96-MQX5-9L', 'totalRateUsd': '310.00', 'serviceLevel': 'STANDARD', 'pickupFlexibility': 'FLEXIBLE_2', 'description': 'Standard, 2-day pickup flexibility. Pickup: 8/23 - 8/27, Delivery: 8/30 - 9/9. Pickup can occur on any of the listed days.', 'pickupRange': {'startDate': '2024-08-23', 'endDate': '2024-08-27'}, 'deliveryRange': {'startDate': '2024-08-30', 'endDate': '2024-09-09'}, 'transitTime': {'minDays': 5, 'maxDays': 8}}, {'guid': 'a77f1a9e-d56f-4aeb-91b4-cbafc89ca079', 'referenceNumber': 'F96-MQX5-FL', 'totalRateUsd': '2029.00', 'serviceLevel': 'FLOCK_DIRECT', 'pickupFlexibility': 'INFLEXIBLE', 'description': 'Flock Direct, no pickup flexibility. Pickup: 8/26, Delivery: 9/3.', 'pickupRange': {'startDate': '2024-08-26', 'endDate': '2024-08-26'}, 'deliveryRange': {'startDate': '2024-09-03', 'endDate': '2024-09-03'}, 'transitTime': {'minDays': 5, 'maxDays': 5}}, {'guid': '26c7a19a-3d91-4bfb-b5ac-57d9a660799e', 'referenceNumber': 'F96-MQX5-XQ', 'totalRateUsd': '1920.00', 'serviceLevel': 'FLOCK_DIRECT', 'pickupFlexibility': 'FLEXIBLE_1', 'description': 'Flock Direct, 1-day pickup flexibility. Pickup: 8/26 - 8/27, Delivery: 9/3. Pickup can occur on any of the listed days.', 'pickupRange': {'startDate': '2024-08-26', 'endDate': '2024-08-27'}, 'deliveryRange': {'startDate': '2024-09-03', 'endDate': '2024-09-03'}, 'transitTime': {'minDays': 5, 'maxDays': 5}}, {'guid': '890c81f6-06ee-4087-9dad-25a8676cce63', 'referenceNumber': 'F96-MQX5-XS', 'totalRateUsd': '1906.00', 'serviceLevel': 'FLOCK_DIRECT', 'pickupFlexibility': 'FLEXIBLE_2', 'description': 'Flock Direct, 2-day pickup flexibility. Pickup: 8/26 - 8/28, Delivery: 9/3. Pickup can occur on any of the listed days.', 'pickupRange': {'startDate': '2024-08-26', 'endDate': '2024-08-28'}, 'deliveryRange': {'startDate': '2024-09-03', 'endDate': '2024-09-03'}, 'transitTime': {'minDays': 5, 'maxDays': 5}}], 'shipment': {'pickupDate': '2024-08-23', 'pickUpStopDetails': {'postalCode': '92336', 'locationType': 'BUSINESS_DOCK', 'liftgateRequired': False, 'insideStop': False, 'hasPalletJackAndForklift': False, 'schedulingService': {'type': 'WINDOW', 'startTime': '09:00:00', 'endTime': '16:00:00'}}, 'deliveryStopDetails': {'postalCode': '28805', 'locationType': 'BUSINESS_NO_DOCK', 'liftgateRequired': False, 'insideStop': False, 'hasPalletJackAndForklift': True, 'schedulingService': {'type': 'CALL_FOR_APPOINTMENT'}}, 'linearFootage': 5, 'shipmentItems': [{'quantity': 2, 'packagingType': 'PALLET', 'dimensions': {'widthIn': 27, 'lengthIn': 53, 'heightIn': 30}, 'freightClass': 'CLASS_92_5', 'stackable': False, 'turnable': True, 'totalWeightLbs': 137, 'description': 'General Merchandise'}, {'quantity': 1, 'packagingType': 'PALLET', 'dimensions': {'widthIn': 27, 'lengthIn': 53, 'heightIn': 30}, 'freightClass': 'CLASS_175', 'stackable': False, 'turnable': True, 'totalWeightLbs': 137, 'description': 'General Merchandise'}], 'additionalServices': {'blockAndBraceRequired': False, 'exclusiveUseRequired': False, 'loadBarCount': 0, 'strapCount': 0, 'unloadingServicesRequired': False, 'blindShipmentCoordinationRequired': False, 'loadToRideRequired': False, 'foodGradeTrailerRequired': False, 'dryVanProhibited': False, 'reeferProhibited': True, 'straightTruckProhibited': False, 'sprinterVanProhibited': False, 'insuredAmountUsd': None}}}
+2024-08-23 10:41:31,521 INFO:127.0.0.1 - - [23/Aug/2024 10:41:31] "POST /process_form HTTP/1.1" 200 -
+2024-08-23 10:41:31,526 INFO:Data successfully written to data.json
+2024-08-23 10:42:04,512 INFO:127.0.0.1 - - [23/Aug/2024 10:42:04] "OPTIONS /process_form HTTP/1.1" 200 -
+2024-08-23 10:42:04,516 INFO:Received data: [{'so': '990240700029053', 'accessorials': 'Appointment Fee, Lift Gate Delivery', 'zip': '28805', 'pick_up_date': 45530, 'delivery_ServiceType': 'CALL_FOR_APPOINTMENT', 'locationType': 'BUSINESS_NO_DOCK', 'hasPalletJackAndForklift': 'True', 'shipmentServiceType': 'WINDOW', 'warehouseLocation': 'LA', 'cargoItems': [{'length': 53, 'width': 27, 'height': 30, 'weight': 137, 'palletNumber': 2}, {'length': 53, 'width': 27, 'height': 30, 'weight': 137, 'palletNumber': '1'}]}]
+2024-08-23 10:42:04,516 INFO:Processing SO: '990240700029053'
+2024-08-23 10:42:04,517 INFO:Sending Daylight request: {
+  "dyltRateQuoteReq": {
+    "accountNumber": "21818977",
+    "userName": "LINKTRANS",
+    "password": "daylight",
+    "billTerms": "PP",
+    "serviceType": "LTL",
+    "pickupDate": "2024-08-26",
+    "shipperInfo": {
+      "customerNumber": "21818977",
+      "customerName": "Linktrans",
+      "customerAddress": {
+        "streetAddress": "14650 Meyer Canyon Dr, DOCK 1203",
+        "aptAddress": "",
+        "city": "Fontana",
+        "state": "CA",
+        "zip": "92336"
+      }
+    },
+    "consigneeInfo": {
+      "customerNumber": "",
+      "customerName": "",
+      "customerAddress": {
+        "streetAddress": "",
+        "aptAddress": "",
+        "city": "",
+        "state": "",
+        "zip": "28805"
+      }
+    },
+    "items": {
+      "item": [
+        {
+          "description": "General Merchandise",
+          "nmfcNumber": "",
+          "nmfcSubNumber": "",
+          "pcs": 0,
+          "pallets": 2,
+          "weight": 274,
+          "actualClass": "175",
+          "dimensions": "53*27*30",
+          "freightClass": "CLASS_175"
+        },
+        {
+          "description": "General Merchandise",
+          "nmfcNumber": "",
+          "nmfcSubNumber": "",
+          "pcs": 0,
+          "pallets": "1",
+          "weight": 137,
+          "actualClass": "175",
+          "dimensions": "53*27*30",
+          "freightClass": "CLASS_175"
+        }
+      ]
+    },
+    "accessorials": {
+      "accessorial": [
+        {
+          "accId": "Appointment Fee",
+          "accName": "Delivery"
+        },
+        {
+          "accId": "Lift Gate Delivery",
+          "accName": "Delivery"
+        }
+      ]
+    }
+  }
+}
+2024-08-23 10:42:08,155 INFO:Received Daylight response: {'dyltRateQuoteResp': {'success': 'YES', 'errorInformation': {'errorMessage': 'NULL'}, 'quoteNumber': 'CQ167305836', 'quoteDate': '08/23/2024', 'pickupDate': '08/26/2024', 'earliestDeliveryDate': '08/30/2024', 'totalWeight': 411, 'origZip': 92336, 'destZip': 28805, 'rateBaseName': 'DYLT507AW 2024-08-19', 'itemCharges': {'itemCharge': [{'description': 'General Merchandise', 'pcs': 0, 'pallets': 2, 'weight': 274, 'actualClass': 175, 'rateClass': 175, 'rate': 1342.66, 'charge': 3678.89, 'discountPct': 93.7}, {'description': 'General Merchandise', 'pcs': 0, 'pallets': 1, 'weight': 137, 'actualClass': 175, 'rateClass': 175, 'rate': 1342.66, 'charge': 1839.44, 'discountPct': 93.7}, {'description': 'Weight Deficit', 'weight': 89, 'rate': 1342.66, 'charge': 1194.97, 'discountPct': 93.7}]}, 'accessorialCharges': {'accessorialCharge': [{'reqAccessorial': 'California Capacity Surcharge', 'accRate': 0.0, 'accCharge': 0.0}, {'reqAccessorial': 'California Compliance Surcharge', 'accRate': 30.0, 'accCharge': 30.0}, {'reqAccessorial': 'Compliance Services Fee', 'accRate': 20.0, 'accCharge': 20.0}, {'reqAccessorial': 'Delivery Appointment Fee', 'accRate': 10.0, 'accCharge': 10.0}, {'reqAccessorial': 'Lift Gate Delivery', 'accRate': 0.0, 'accCharge': 50.0}, {'reqAccessorial': 'Fuel Surcharge', 'accRate': 0.271, 'accCharge': 114.614}]}, 'totalCharges': {'grossCharge': 6713.3, 'fuelSurcharge': 114.614, 'totalAccessorial': 224.61, 'discountAmt': 6290.37, 'netCharge': 647.54}}}
+2024-08-23 10:42:08,155 INFO:Sending Auptix request: {
+  "shipment": {
+    "pickupDate": "2024-08-26",
+    "pickUpStopDetails": {
+      "postalCode": "92336",
+      "locationType": "BUSINESS_DOCK",
+      "schedulingService": {
+        "type": "WINDOW",
+        "startTime": "09:00",
+        "endTime": "16:00"
+      }
+    },
+    "deliveryStopDetails": {
+      "postalCode": "28805",
+      "locationType": "BUSINESS_NO_DOCK",
+      "hasPalletJackAndForklift": true,
+      "schedulingService": {
+        "type": "CALL_FOR_APPOINTMENT",
+        "date": "2024-08-26",
+        "startTime": "09:00",
+        "endTime": "16:00"
+      }
+    },
+    "shipmentItems": [
+      {
+        "quantity": "2",
+        "packagingType": "PALLET",
+        "dimensions": {
+          "lengthIn": 53,
+          "widthIn": 27,
+          "heightIn": 30
+        },
+        "stackable": false,
+        "turnable": true,
+        "totalWeightLbs": 137,
+        "freightClass": "CLASS_92_5",
+        "description": "General Merchandise"
+      },
+      {
+        "quantity": "1",
+        "packagingType": "PALLET",
+        "dimensions": {
+          "lengthIn": 53,
+          "widthIn": 27,
+          "heightIn": 30
+        },
+        "stackable": false,
+        "turnable": true,
+        "totalWeightLbs": 137,
+        "freightClass": "CLASS_175",
+        "description": "General Merchandise"
+      }
+    ],
+    "additionalServices": {
+      "reeferProhibited": true
+    }
+  }
+}
+2024-08-23 10:42:20,763 INFO:Received Auptix response: {'guid': 'd39d5ab5-d88e-4815-880c-9b1e9a2c5bcb', 'referenceNumber': 'BQC-RDYB', 'expirationInstant': '2024-08-27T06:59:59Z', 'fulfillmentOptions': [{'guid': '51a12c7b-fc05-4a99-8015-09c1fd4bbb46', 'referenceNumber': 'BQC-RDYB-VJ', 'totalRateUsd': '314.22', 'serviceLevel': 'STANDARD', 'pickupFlexibility': 'INFLEXIBLE', 'description': 'Standard, no pickup flexibility. Pickup: 8/26, Delivery: 9/3 - 9/6.', 'pickupRange': {'startDate': '2024-08-26', 'endDate': '2024-08-26'}, 'deliveryRange': {'startDate': '2024-09-03', 'endDate': '2024-09-06'}, 'transitTime': {'minDays': 5, 'maxDays': 8}}, {'guid': 'e9a6b457-5553-4504-b4e0-3b6d000e9cec', 'referenceNumber': 'BQC-RDYB-FX', 'totalRateUsd': '309.80', 'serviceLevel': 'STANDARD', 'pickupFlexibility': 'FLEXIBLE_1', 'description': 'Standard, 1-day pickup flexibility. Pickup: 8/26 - 8/27, Delivery: 9/3 - 9/9. Pickup can occur on any of the listed days.', 'pickupRange': {'startDate': '2024-08-26', 'endDate': '2024-08-27'}, 'deliveryRange': {'startDate': '2024-09-03', 'endDate': '2024-09-09'}, 'transitTime': {'minDays': 5, 'maxDays': 8}}, {'guid': 'bb699799-8a8d-40fa-8059-1b07c02edea2', 'referenceNumber': 'BQC-RDYB-Y9', 'totalRateUsd': '309.80', 'serviceLevel': 'STANDARD', 'pickupFlexibility': 'FLEXIBLE_2', 'description': 'Standard, 2-day pickup flexibility. Pickup: 8/26 - 8/28, Delivery: 9/3 - 9/10. Pickup can occur on any of the listed days.', 'pickupRange': {'startDate': '2024-08-26', 'endDate': '2024-08-28'}, 'deliveryRange': {'startDate': '2024-09-03', 'endDate': '2024-09-10'}, 'transitTime': {'minDays': 5, 'maxDays': 8}}, {'guid': 'f785c882-5346-45c8-a278-6af3d286a259', 'referenceNumber': 'BQC-RDYB-MZ', 'totalRateUsd': '1943.00', 'serviceLevel': 'FLOCK_DIRECT', 'pickupFlexibility': 'INFLEXIBLE', 'description': 'Flock Direct, no pickup flexibility. Pickup: 8/26, Delivery: 9/3.', 'pickupRange': {'startDate': '2024-08-26', 'endDate': '2024-08-26'}, 'deliveryRange': {'startDate': '2024-09-03', 'endDate': '2024-09-03'}, 'transitTime': {'minDays': 5, 'maxDays': 5}}, {'guid': '90394bf0-2f74-49d1-96df-d6f539ddf455', 'referenceNumber': 'BQC-RDYB-9D', 'totalRateUsd': '1866.00', 'serviceLevel': 'FLOCK_DIRECT', 'pickupFlexibility': 'FLEXIBLE_1', 'description': 'Flock Direct, 1-day pickup flexibility. Pickup: 8/26 - 8/27, Delivery: 9/3. Pickup can occur on any of the listed days.', 'pickupRange': {'startDate': '2024-08-26', 'endDate': '2024-08-27'}, 'deliveryRange': {'startDate': '2024-09-03', 'endDate': '2024-09-03'}, 'transitTime': {'minDays': 5, 'maxDays': 5}}, {'guid': 'eba6ad22-5b0b-4f95-840e-d1d55ba2cb1b', 'referenceNumber': 'BQC-RDYB-BZ', 'totalRateUsd': '1853.00', 'serviceLevel': 'FLOCK_DIRECT', 'pickupFlexibility': 'FLEXIBLE_2', 'description': 'Flock Direct, 2-day pickup flexibility. Pickup: 8/26 - 8/28, Delivery: 9/3. Pickup can occur on any of the listed days.', 'pickupRange': {'startDate': '2024-08-26', 'endDate': '2024-08-28'}, 'deliveryRange': {'startDate': '2024-09-03', 'endDate': '2024-09-03'}, 'transitTime': {'minDays': 5, 'maxDays': 5}}], 'shipment': {'pickupDate': '2024-08-26', 'pickUpStopDetails': {'postalCode': '92336', 'locationType': 'BUSINESS_DOCK', 'liftgateRequired': False, 'insideStop': False, 'hasPalletJackAndForklift': False, 'schedulingService': {'type': 'WINDOW', 'startTime': '09:00:00', 'endTime': '16:00:00'}}, 'deliveryStopDetails': {'postalCode': '28805', 'locationType': 'BUSINESS_NO_DOCK', 'liftgateRequired': False, 'insideStop': False, 'hasPalletJackAndForklift': True, 'schedulingService': {'type': 'CALL_FOR_APPOINTMENT'}}, 'linearFootage': 5, 'shipmentItems': [{'quantity': 2, 'packagingType': 'PALLET', 'dimensions': {'widthIn': 27, 'lengthIn': 53, 'heightIn': 30}, 'freightClass': 'CLASS_92_5', 'stackable': False, 'turnable': True, 'totalWeightLbs': 137, 'description': 'General Merchandise'}, {'quantity': 1, 'packagingType': 'PALLET', 'dimensions': {'widthIn': 27, 'lengthIn': 53, 'heightIn': 30}, 'freightClass': 'CLASS_175', 'stackable': False, 'turnable': True, 'totalWeightLbs': 137, 'description': 'General Merchandise'}], 'additionalServices': {'blockAndBraceRequired': False, 'exclusiveUseRequired': False, 'loadBarCount': 0, 'strapCount': 0, 'unloadingServicesRequired': False, 'blindShipmentCoordinationRequired': False, 'loadToRideRequired': False, 'foodGradeTrailerRequired': False, 'dryVanProhibited': False, 'reeferProhibited': True, 'straightTruckProhibited': False, 'sprinterVanProhibited': False, 'insuredAmountUsd': None}}}
+2024-08-23 10:42:20,764 INFO:127.0.0.1 - - [23/Aug/2024 10:42:20] "POST /process_form HTTP/1.1" 200 -
+2024-08-23 10:42:20,769 INFO:Data successfully written to data.json
+2024-08-23 10:43:30,090 INFO:127.0.0.1 - - [23/Aug/2024 10:43:30] "OPTIONS /process_form HTTP/1.1" 200 -
+2024-08-23 10:43:30,094 INFO:Received data: [{'so': '990240700029053', 'accessorials': 'Appointment Fee, Lift Gate Delivery', 'zip': '28805', 'pick_up_date': 45530, 'delivery_ServiceType': 'CALL_FOR_APPOINTMENT', 'locationType': 'BUSINESS_NO_DOCK', 'hasPalletJackAndForklift': 'True', 'shipmentServiceType': 'WINDOW', 'warehouseLocation': 'LA', 'cargoItems': [{'length': 53, 'width': 27, 'height': 30, 'weight': 137, 'palletNumber': 2}, {'length': 53, 'width': 27, 'height': 30, 'weight': 137, 'palletNumber': '1'}]}]
+2024-08-23 10:43:30,094 INFO:Processing SO: '990240700029053'
+2024-08-23 10:43:30,094 INFO:Sending Daylight request: {
+  "dyltRateQuoteReq": {
+    "accountNumber": "21818977",
+    "userName": "LINKTRANS",
+    "password": "daylight",
+    "billTerms": "PP",
+    "serviceType": "LTL",
+    "pickupDate": "2024-08-26",
+    "shipperInfo": {
+      "customerNumber": "21818977",
+      "customerName": "Linktrans",
+      "customerAddress": {
+        "streetAddress": "14650 Meyer Canyon Dr, DOCK 1203",
+        "aptAddress": "",
+        "city": "Fontana",
+        "state": "CA",
+        "zip": "92336"
+      }
+    },
+    "consigneeInfo": {
+      "customerNumber": "",
+      "customerName": "",
+      "customerAddress": {
+        "streetAddress": "",
+        "aptAddress": "",
+        "city": "",
+        "state": "",
+        "zip": "28805"
+      }
+    },
+    "items": {
+      "item": [
+        {
+          "description": "General Merchandise",
+          "nmfcNumber": "",
+          "nmfcSubNumber": "",
+          "pcs": 0,
+          "pallets": 2,
+          "weight": 274,
+          "actualClass": "175",
+          "dimensions": "53*27*30",
+          "freightClass": "CLASS_175"
+        },
+        {
+          "description": "General Merchandise",
+          "nmfcNumber": "",
+          "nmfcSubNumber": "",
+          "pcs": 0,
+          "pallets": "1",
+          "weight": 137,
+          "actualClass": "175",
+          "dimensions": "53*27*30",
+          "freightClass": "CLASS_175"
+        }
+      ]
+    },
+    "accessorials": {
+      "accessorial": [
+        {
+          "accId": "Appointment Fee",
+          "accName": "Delivery"
+        },
+        {
+          "accId": "Lift Gate Delivery",
+          "accName": "Delivery"
+        }
+      ]
+    }
+  }
+}
+2024-08-23 10:43:33,783 INFO:Received Daylight response: {'dyltRateQuoteResp': {'success': 'YES', 'errorInformation': {'errorMessage': 'NULL'}, 'quoteNumber': 'CQ167306176', 'quoteDate': '08/23/2024', 'pickupDate': '08/26/2024', 'earliestDeliveryDate': '08/30/2024', 'totalWeight': 411, 'origZip': 92336, 'destZip': 28805, 'rateBaseName': 'DYLT507AW 2024-08-19', 'itemCharges': {'itemCharge': [{'description': 'General Merchandise', 'pcs': 0, 'pallets': 2, 'weight': 274, 'actualClass': 175, 'rateClass': 175, 'rate': 1342.66, 'charge': 3678.89, 'discountPct': 93.7}, {'description': 'General Merchandise', 'pcs': 0, 'pallets': 1, 'weight': 137, 'actualClass': 175, 'rateClass': 175, 'rate': 1342.66, 'charge': 1839.44, 'discountPct': 93.7}, {'description': 'Weight Deficit', 'weight': 89, 'rate': 1342.66, 'charge': 1194.97, 'discountPct': 93.7}]}, 'accessorialCharges': {'accessorialCharge': [{'reqAccessorial': 'California Capacity Surcharge', 'accRate': 0.0, 'accCharge': 0.0}, {'reqAccessorial': 'California Compliance Surcharge', 'accRate': 30.0, 'accCharge': 30.0}, {'reqAccessorial': 'Lift Gate Delivery', 'accRate': 0.0, 'accCharge': 50.0}, {'reqAccessorial': 'Fuel Surcharge', 'accRate': 0.271, 'accCharge': 114.614}, {'reqAccessorial': 'Compliance Services Fee', 'accRate': 20.0, 'accCharge': 20.0}, {'reqAccessorial': 'Delivery Appointment Fee', 'accRate': 10.0, 'accCharge': 10.0}]}, 'totalCharges': {'grossCharge': 6713.3, 'fuelSurcharge': 114.614, 'totalAccessorial': 224.61, 'discountAmt': 6290.37, 'netCharge': 647.54}}}
+2024-08-23 10:43:33,783 INFO:Sending Auptix request: {
+  "shipment": {
+    "pickupDate": "2024-08-26",
+    "pickUpStopDetails": {
+      "postalCode": "92336",
+      "locationType": "BUSINESS_DOCK",
+      "schedulingService": {
+        "type": "WINDOW",
+        "startTime": "09:00",
+        "endTime": "16:00"
+      }
+    },
+    "deliveryStopDetails": {
+      "postalCode": "28805",
+      "locationType": "BUSINESS_NO_DOCK",
+      "hasPalletJackAndForklift": true,
+      "schedulingService": {
+        "type": "CALL_FOR_APPOINTMENT",
+        "date": "2024-08-26",
+        "startTime": "09:00",
+        "endTime": "16:00"
+      }
+    },
+    "shipmentItems": [
+      {
+        "quantity": "2",
+        "packagingType": "PALLET",
+        "dimensions": {
+          "lengthIn": 53,
+          "widthIn": 27,
+          "heightIn": 30
+        },
+        "stackable": false,
+        "turnable": true,
+        "totalWeightLbs": 137,
+        "freightClass": "CLASS_92_5",
+        "description": "General Merchandise"
+      },
+      {
+        "quantity": "1",
+        "packagingType": "PALLET",
+        "dimensions": {
+          "lengthIn": 53,
+          "widthIn": 27,
+          "heightIn": 30
+        },
+        "stackable": false,
+        "turnable": true,
+        "totalWeightLbs": 137,
+        "freightClass": "CLASS_175",
+        "description": "General Merchandise"
+      }
+    ],
+    "additionalServices": {
+      "reeferProhibited": true
+    }
+  }
+}
+2024-08-23 10:43:51,756 INFO:Received Auptix response: {'guid': 'd506979d-01f7-4109-8559-1fa9809989da', 'referenceNumber': '2C6-JSJG', 'expirationInstant': '2024-08-27T06:59:59Z', 'fulfillmentOptions': [{'guid': '65bff21d-51b4-4510-ab95-ee6f009000f8', 'referenceNumber': '2C6-JSJG-TN', 'totalRateUsd': '314.22', 'serviceLevel': 'STANDARD', 'pickupFlexibility': 'INFLEXIBLE', 'description': 'Standard, no pickup flexibility. Pickup: 8/26, Delivery: 9/3 - 9/6.', 'pickupRange': {'startDate': '2024-08-26', 'endDate': '2024-08-26'}, 'deliveryRange': {'startDate': '2024-09-03', 'endDate': '2024-09-06'}, 'transitTime': {'minDays': 5, 'maxDays': 8}}, {'guid': '5eff65f6-775a-45b8-b995-14b79f0b691b', 'referenceNumber': '2C6-JSJG-RB', 'totalRateUsd': '309.80', 'serviceLevel': 'STANDARD', 'pickupFlexibility': 'FLEXIBLE_1', 'description': 'Standard, 1-day pickup flexibility. Pickup: 8/26 - 8/27, Delivery: 9/3 - 9/9. Pickup can occur on any of the listed days.', 'pickupRange': {'startDate': '2024-08-26', 'endDate': '2024-08-27'}, 'deliveryRange': {'startDate': '2024-09-03', 'endDate': '2024-09-09'}, 'transitTime': {'minDays': 5, 'maxDays': 8}}, {'guid': 'b491825b-828a-478d-8571-51cd37ca768f', 'referenceNumber': '2C6-JSJG-G8', 'totalRateUsd': '309.80', 'serviceLevel': 'STANDARD', 'pickupFlexibility': 'FLEXIBLE_2', 'description': 'Standard, 2-day pickup flexibility. Pickup: 8/26 - 8/28, Delivery: 9/3 - 9/10. Pickup can occur on any of the listed days.', 'pickupRange': {'startDate': '2024-08-26', 'endDate': '2024-08-28'}, 'deliveryRange': {'startDate': '2024-09-03', 'endDate': '2024-09-10'}, 'transitTime': {'minDays': 5, 'maxDays': 8}}, {'guid': 'cbf8f70d-6b76-49b3-8f89-0a0995d196cb', 'referenceNumber': '2C6-JSJG-VK', 'totalRateUsd': '1943.00', 'serviceLevel': 'FLOCK_DIRECT', 'pickupFlexibility': 'INFLEXIBLE', 'description': 'Flock Direct, no pickup flexibility. Pickup: 8/26, Delivery: 9/3.', 'pickupRange': {'startDate': '2024-08-26', 'endDate': '2024-08-26'}, 'deliveryRange': {'startDate': '2024-09-03', 'endDate': '2024-09-03'}, 'transitTime': {'minDays': 5, 'maxDays': 5}}, {'guid': '51d8ccc2-4a99-47dd-b2cd-990bf5124d98', 'referenceNumber': '2C6-JSJG-S9', 'totalRateUsd': '1866.00', 'serviceLevel': 'FLOCK_DIRECT', 'pickupFlexibility': 'FLEXIBLE_1', 'description': 'Flock Direct, 1-day pickup flexibility. Pickup: 8/26 - 8/27, Delivery: 9/3. Pickup can occur on any of the listed days.', 'pickupRange': {'startDate': '2024-08-26', 'endDate': '2024-08-27'}, 'deliveryRange': {'startDate': '2024-09-03', 'endDate': '2024-09-03'}, 'transitTime': {'minDays': 5, 'maxDays': 5}}, {'guid': '7a0fe313-2379-43c1-8c60-c327c70553fe', 'referenceNumber': '2C6-JSJG-KQ', 'totalRateUsd': '1853.00', 'serviceLevel': 'FLOCK_DIRECT', 'pickupFlexibility': 'FLEXIBLE_2', 'description': 'Flock Direct, 2-day pickup flexibility. Pickup: 8/26 - 8/28, Delivery: 9/3. Pickup can occur on any of the listed days.', 'pickupRange': {'startDate': '2024-08-26', 'endDate': '2024-08-28'}, 'deliveryRange': {'startDate': '2024-09-03', 'endDate': '2024-09-03'}, 'transitTime': {'minDays': 5, 'maxDays': 5}}], 'shipment': {'pickupDate': '2024-08-26', 'pickUpStopDetails': {'postalCode': '92336', 'locationType': 'BUSINESS_DOCK', 'liftgateRequired': False, 'insideStop': False, 'hasPalletJackAndForklift': False, 'schedulingService': {'type': 'WINDOW', 'startTime': '09:00:00', 'endTime': '16:00:00'}}, 'deliveryStopDetails': {'postalCode': '28805', 'locationType': 'BUSINESS_NO_DOCK', 'liftgateRequired': False, 'insideStop': False, 'hasPalletJackAndForklift': True, 'schedulingService': {'type': 'CALL_FOR_APPOINTMENT'}}, 'linearFootage': 5, 'shipmentItems': [{'quantity': 2, 'packagingType': 'PALLET', 'dimensions': {'widthIn': 27, 'lengthIn': 53, 'heightIn': 30}, 'freightClass': 'CLASS_92_5', 'stackable': False, 'turnable': True, 'totalWeightLbs': 137, 'description': 'General Merchandise'}, {'quantity': 1, 'packagingType': 'PALLET', 'dimensions': {'widthIn': 27, 'lengthIn': 53, 'heightIn': 30}, 'freightClass': 'CLASS_175', 'stackable': False, 'turnable': True, 'totalWeightLbs': 137, 'description': 'General Merchandise'}], 'additionalServices': {'blockAndBraceRequired': False, 'exclusiveUseRequired': False, 'loadBarCount': 0, 'strapCount': 0, 'unloadingServicesRequired': False, 'blindShipmentCoordinationRequired': False, 'loadToRideRequired': False, 'foodGradeTrailerRequired': False, 'dryVanProhibited': False, 'reeferProhibited': True, 'straightTruckProhibited': False, 'sprinterVanProhibited': False, 'insuredAmountUsd': None}}}
+2024-08-23 10:43:51,757 INFO:127.0.0.1 - - [23/Aug/2024 10:43:51] "POST /process_form HTTP/1.1" 200 -
+2024-08-23 10:43:51,760 INFO:Data successfully written to data.json

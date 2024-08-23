@@ -1,0 +1,223 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Data Table with Sidebar and Pick Up Date Filter</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            display: flex;
+        }
+        .content {
+            margin-left: 250px;
+            padding: 20px;
+            flex-grow: 1;
+        }
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-top: 20px;
+        }
+        th, td {
+            padding: 10px;
+            border: 1px solid #ddd;
+            text-align: left;
+        }
+        th {
+            background-color: #f2f2f2;
+        }
+        #filterContainer {
+            margin-bottom: 20px;
+            display: flex;
+            align-items: center;
+        }
+        #filterContainer label {
+            margin-right: 10px;
+        }
+        #filterContainer input[type="date"] {
+            padding: 5px;
+            font-size: 16px;
+        }
+        #filterContainer button {
+            padding: 5px 10px;
+            font-size: 16px;
+            margin-left: 10px;
+            cursor: pointer;
+            background-color: #3498db;
+            color: white;
+            border: none;
+            border-radius: 3px;
+        }
+        #filterContainer button:hover {
+            background-color: #2980b9;
+        }
+    </style>
+</head>
+<body>
+
+    <!-- Sidebar container -->
+    <div id="sidebar-container"></div>
+
+    <!-- Main content -->
+    <div class="content">
+        <div id="filterContainer">
+            <label for="pickUpDateFilter">Filter by Pick Up Date:</label>
+            <input type="date" id="pickUpDateFilter">
+            <button onclick="filterTable()">Filter</button>
+        </div>
+
+        <table id="dataTable">
+            <thead>
+                <tr>
+                    <th>SO</th>
+                    <th>Accessorials</th>
+                    <th>Length (inch)</th>
+                    <th>Width (inch)</th>
+                    <th>Height (inch)</th>
+                    <th>Weight</th>
+                    <th>Delivery Zip</th>
+                    <th>Pallet Number</th>
+                    <th>Pick Up Date</th>
+                    <th>Delivery Service Type</th>
+                    <th>Location Type</th>
+                    <th>Has Pallet Jack and Forklift</th>
+                    <th>Shipment Service Type</th>
+                    <th>Daylight</th>
+                    <th>Daylight Class</th>
+                    <th>Auptix Class</th>
+                    <th>Auptix Standard Inflexible</th>
+                    <th>Auptix Flock Direct Inflexible</th>
+                    <th>Warehouse Location</th>
+                </tr>
+            </thead>
+            <tbody>
+                <!-- Data rows will be inserted here dynamically -->
+            </tbody>
+        </table>
+    </div>
+
+    <script>
+        // Load the sidebar HTML into the sidebar container
+        fetch('sidebar.html')
+            .then(response => response.text())
+            .then(html => {
+                document.getElementById('sidebar-container').innerHTML = html;
+            })
+            .then(() => {
+                // After loading the sidebar, execute its script to populate the menu
+                return fetch('sidebarData.json');
+            })
+            .then(response => response.json())
+            .then(data => {
+                populateSidebar(data);
+            })
+            .catch(error => console.error('Error loading sidebar:', error));
+
+        function populateSidebar(data) {
+            const sidebar = document.getElementById('sidebar');
+            data.menuItems.forEach(item => {
+                let menuItem = document.createElement('a');
+                menuItem.href = item.link || '#';
+                menuItem.textContent = item.name;
+
+                if (item.subItems) {
+                    menuItem.classList.add('expandable');
+                    let submenu = document.createElement('div');
+                    submenu.classList.add('submenu');
+                    item.subItems.forEach(subItem => {
+                        let submenuItem = document.createElement('a');
+                        submenuItem.href = subItem.link;
+                        submenuItem.textContent = subItem.name;
+                        submenu.appendChild(submenuItem);
+                    });
+                    menuItem.appendChild(submenu);
+                }
+
+                sidebar.appendChild(menuItem);
+            });
+        }
+
+        let jsonData = [];
+
+        function convertExcelDate(value) {
+    // 检查是否是数字，并且是合理的 Excel 日期范围
+            if (typeof value === 'number' && value >= 25569) {
+                const utc_days = Math.floor(value - 25569);
+                const utc_value = utc_days * 86400;
+                const date_info = new Date(utc_value * 1000);
+
+                if (isNaN(date_info.getTime())) {
+                    return "Invalid Date";
+                }
+
+                const date = new Date(date_info.getUTCFullYear(), date_info.getUTCMonth(), date_info.getUTCDate());
+                return date.toISOString().split('T')[0];
+            }
+
+            // 检查是否是 JavaScript 日期对象或可解析的日期字符串
+            else if (value instanceof Date || !isNaN(Date.parse(value))) {
+                const date = new Date(value);
+                if (isNaN(date.getTime())) {
+                    return "Invalid Date";
+                }
+                return date.toISOString().split('T')[0];
+            }
+
+            // 如果都不是，返回 "Invalid Date"
+            return "Invalid Date";
+        }
+
+
+        function populateTable(data) {
+            const tableBody = document.getElementById('dataTable').getElementsByTagName('tbody')[0];
+            tableBody.innerHTML = ""; // Clear existing table rows
+
+            data.forEach(item => {
+                let row = tableBody.insertRow();
+
+                row.insertCell(0).textContent = item.SO;
+                row.insertCell(1).textContent = item.Accessorials;
+                row.insertCell(2).textContent = item["Length (inch)"];
+                row.insertCell(3).textContent = item["Width (inch)"];
+                row.insertCell(4).textContent = item["Height (inch)"];
+                row.insertCell(5).textContent = item.Weight;
+                row.insertCell(6).textContent = item["Delivery Zip"];
+                row.insertCell(7).textContent = item["Pallet Number"];
+                row.insertCell(8).textContent = convertExcelDate(item["Pick Up Date"]);
+                row.insertCell(9).textContent = item["Delivery Service Type"];
+                row.insertCell(10).textContent = item["Location Type"];
+                row.insertCell(11).textContent = item["Has Pallet Jack and Forklift"];
+                row.insertCell(12).textContent = item["Shipment Service Type"];
+                row.insertCell(13).textContent = item.Daylight;
+                row.insertCell(14).textContent = item["Daylight Class"];
+                row.insertCell(15).textContent = item["Auptix Class"];
+                row.insertCell(16).textContent = item["Auptix Standard Inflexible"];
+                row.insertCell(17).textContent = item["Auptix Flock Direct Inflexible"];
+                row.insertCell(18).textContent = item["Warehouse Location"];
+            });
+        }
+
+        function filterTable() {
+            const filterValue = document.getElementById('pickUpDateFilter').value;
+            const filteredData = jsonData.filter(item => convertExcelDate(item["Pick Up Date"]) === filterValue);
+            populateTable(filteredData);
+        }
+
+        function loadData() {
+            fetch('data.json')
+                .then(response => response.json())
+                .then(data => {
+                    jsonData = data;
+                    populateTable(jsonData);
+                })
+                .catch(error => console.error('Error loading data:', error));
+        }
+
+        // Load data and populate table on page load
+        loadData();
+    </script>
+
+</body>
+</html>

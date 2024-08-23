@@ -1,0 +1,194 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Log File Viewer with Sidebar</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <style>
+        body {
+            margin: 0;
+            display: flex;
+            height: 100vh;
+            font-family: Arial, sans-serif;
+        }
+        .sidebar {
+            width: 250px;
+            background-color: #2c3e50;
+            color: white;
+            position: fixed;
+            top: 0;
+            bottom: 0;
+            overflow-y: auto;
+            padding-top: 20px;
+        }
+        .sidebar a {
+            display: block;
+            padding: 15px;
+            text-decoration: none;
+            color: white;
+            font-size: 18px;
+            transition: background 0.3s;
+        }
+        .sidebar a:hover {
+            background-color: #34495e;
+        }
+        .sidebar .submenu {
+            display: none;
+            padding-left: 20px;
+        }
+        .sidebar .expandable:hover .submenu {
+            display: block;
+        }
+        .content {
+            margin-left: 250px;
+            padding: 20px;
+            flex-grow: 1;
+            overflow-y: auto;
+        }
+        #logContainer {
+            max-height: calc(100vh - 100px);
+            overflow-y: auto;
+            border: 1px solid #ddd;
+            padding: 10px;
+            background-color: #f9f9f9;
+            white-space: pre-wrap;
+        }
+        #controls {
+            margin-bottom: 20px;
+        }
+        #controls input[type="text"], 
+        #controls input[type="date"] {
+            padding: 5px;
+            font-size: 16px;
+            margin-right: 10px;
+        }
+        #controls button {
+            padding: 5px 10px;
+            font-size: 16px;
+            margin-right: 10px;
+            cursor: pointer;
+            background-color: #3498db;
+            color: white;
+            border: none;
+            border-radius: 3px;
+        }
+        #controls button:hover {
+            background-color: #2980b9;
+        }
+    </style>
+</head>
+<body>
+
+    <!-- Sidebar container -->
+    <div id="sidebar-container"></div>
+
+    <!-- Main content -->
+    <div class="content">
+        <div id="controls">
+            <input type="text" id="searchInput" placeholder="Search...">
+            <input type="date" id="dateFilter">
+            <button onclick="searchLog()">Search</button>
+            <button onclick="clearLog()">Clear</button>
+        </div>
+
+        <div id="logContainer">
+            <!-- Log content will be displayed here -->
+        </div>
+    </div>
+
+    <script>
+        // Load sidebar module
+        // Load the sidebar HTML into the sidebar container
+        fetch('sidebar.html')
+            .then(response => response.text())
+            .then(html => {
+                document.getElementById('sidebar-container').innerHTML = html;
+            })
+            .then(() => {
+                // After loading the sidebar, execute its script to populate the menu
+                return fetch('sidebarData.json');
+            })
+            .then(response => response.json())
+            .then(data => {
+                populateSidebar(data);
+            })
+            .catch(error => console.error('Error loading sidebar:', error));
+
+        function populateSidebar(data) {
+            const sidebar = document.getElementById('sidebar');
+            data.menuItems.forEach(item => {
+                let menuItem = document.createElement('a');
+                menuItem.href = item.link || '#';
+                menuItem.textContent = item.name;
+
+                if (item.subItems) {
+                    menuItem.classList.add('expandable');
+                    let submenu = document.createElement('div');
+                    submenu.classList.add('submenu');
+                    item.subItems.forEach(subItem => {
+                        let submenuItem = document.createElement('a');
+                        submenuItem.href = subItem.link;
+                        submenuItem.textContent = subItem.name;
+                        submenu.appendChild(submenuItem);
+                    });
+                    menuItem.appendChild(submenu);
+                }
+
+                sidebar.appendChild(menuItem);
+            });
+        }
+
+        let logData = [];
+        const maxLines = 1500;
+
+        function loadLogData() {
+            fetch('log.txt')
+                .then(response => response.text())
+                .then(data => {
+                    logData = data.split('\n');
+                    displayLogData(logData);
+                })
+                .catch(error => console.error('Error loading log:', error));
+        }
+
+        function displayLogData(data) {
+            const logContainer = document.getElementById('logContainer');
+            logContainer.innerHTML = ''; // Clear existing content
+
+            const linesToDisplay = data.slice(0, maxLines);
+            linesToDisplay.forEach(line => {
+                const lineDiv = document.createElement('div');
+                lineDiv.textContent = line;
+                logContainer.appendChild(lineDiv);
+            });
+        }
+
+        function searchLog() {
+            const searchTerm = document.getElementById('searchInput').value.toLowerCase();
+            const dateFilter = document.getElementById('dateFilter').value;
+            let filteredData = logData;
+
+            if (dateFilter) {
+                filteredData = filteredData.filter(line => line.includes(dateFilter));
+            }
+
+            if (searchTerm) {
+                filteredData = filteredData.filter(line => line.toLowerCase().includes(searchTerm));
+            }
+
+            displayLogData(filteredData);
+        }
+
+        function clearLog() {
+            document.getElementById('searchInput').value = '';
+            document.getElementById('dateFilter').value = '';
+            displayLogData(logData);
+        }
+
+        // Load log data on page load
+        loadLogData();
+    </script>
+
+</body>
+</html>

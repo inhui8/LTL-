@@ -5,6 +5,15 @@ from flask_cors import CORS
 from datetime import datetime, timedelta
 from rate_quote import RateQuoteAPI, AuptixRateQuoteAPI  # Import the classes
 import requests
+import logging
+from concurrent.futures import ThreadPoolExecutor
+
+# 配置日志记录
+logging.basicConfig(filename='log.txt', level=logging.INFO, 
+                    format='%(asctime)s %(levelname)s:%(message)s')
+
+# 创建一个全局线程池
+executor = ThreadPoolExecutor(max_workers=5)
 
 # Flask app initialization
 app = Flask(__name__)
@@ -80,6 +89,7 @@ def map_accessorials(accessorials):
         'Compliance Services Fee': 'Delivery'
     }
     return [{'accId': acc_id.strip(), 'accName': mapping.get(acc_id.strip(), 'O')} for acc_id in accessorials]
+
 def get_warehouse_address(location):
     addresses = {
         "LA": {
@@ -108,6 +118,7 @@ def get_warehouse_address(location):
         }
     }
     return addresses.get(location, {})
+
 def process_daylight_quote(so_data, items, mapped_accessorials, daylight_api):
     pickup_date_str = excel_date_to_string(so_data['pick_up_date'])
     warehouse_address = get_warehouse_address(so_data['warehouseLocation'])
@@ -150,9 +161,9 @@ def process_daylight_quote(so_data, items, mapped_accessorials, daylight_api):
         }
     }
     try:
-        print(f"Sending Daylight request: {json.dumps(daylight_payload, indent=2)}")
+        logging.info(f"Sending Daylight request: {json.dumps(daylight_payload, indent=2)}")
         daylight_response = daylight_api.get_rate_quote(daylight_payload)
-        print(f"Received Daylight response: {daylight_response}")
+        logging.info(f"Received Daylight response: {daylight_response}")
         if isinstance(daylight_response, str):
             daylight_response = json.loads(daylight_response)
         net_charge, freight_class = parse_daylight_response(daylight_response)
@@ -160,8 +171,32 @@ def process_daylight_quote(so_data, items, mapped_accessorials, daylight_api):
             freight_class = freight_class.replace('.', '_')
         return net_charge, f"CLASS_{freight_class}"
     except Exception as e:
-        print(f"Error occurred while processing Daylight API: {e}")
+        logging.error(f"Error occurred while processing Daylight API: {e}")
         return 'N/A', 'N/A'
+
+def write_to_json_file_async(data, filename='data.json'):
+    """异步写入 JSON 文件的函数"""
+    executor.submit(write_to_json_file, data, filename)
+
+def write_to_json_file(data, filename='data.json'):
+    """实际的文件写入操作"""
+    try:
+        # 读取已有的数据
+        try:
+            with open(filename, 'r') as file:
+                existing_data = json.load(file)
+        except FileNotFoundError:
+            existing_data = []
+
+        # 添加新数据
+        existing_data.append(data)
+
+        # 将更新后的数据写回文件
+        with open(filename, 'w') as file:
+            json.dump(existing_data, file, indent=4)
+        logging.info(f"Data successfully written to {filename}")
+    except Exception as e:
+        logging.error(f"Error writing data to {filename}: {e}")
 
 def parse_daylight_response(response):
     try:
@@ -173,7 +208,7 @@ def parse_daylight_response(response):
             raise ValueError(f"Daylight API error: {error_message}")
         return net_charge, freight_class
     except Exception as e:
-        print(f"Error parsing Daylight response: {e}")
+        logging.error(f"Error parsing Daylight response: {e}")
         return 'N/A', 'N/A'
 
 def parse_auptix_response(response):
@@ -192,7 +227,7 @@ def parse_auptix_response(response):
         freight_class = response['shipment']['shipmentItems'][0]['freightClass']
         return rates, freight_class
     except Exception as e:
-        print(f"Error parsing Auptix response: {e}")
+        logging.error(f"Error parsing Auptix response: {e}")
         return {'STANDARD_INFLEXIBLE': 'pending', 'FLOCK_DIRECT_INFLEXIBLE': 'pending'}, 'N/A'
 
 def process_auptix_quote(so_data, items, auptix_api):
@@ -216,7 +251,7 @@ def process_auptix_quote(so_data, items, auptix_api):
             },
             "stackable": False,
             "turnable": True,
-            "totalWeightLbs": weight,
+            "totalWeightLbs": int(weight/int(item.get('pallets', 1))),
             "freightClass": f"CLASS_{freight_class.replace('.', '_')}",
             "description": "General Merchandise"
         })
@@ -251,19 +286,19 @@ def process_auptix_quote(so_data, items, auptix_api):
         }
     }
     try:
-        print(f"Sending Auptix request: {json.dumps(auptix_payload, indent=2)}")
+        logging.info(f"Sending Auptix request: {json.dumps(auptix_payload, indent=2)}")
         auptix_response = auptix_api.get_rate_quote(auptix_payload)
-        print(f"Received Auptix response: {auptix_response}")
+        logging.info(f"Received Auptix response: {auptix_response}")
         if isinstance(auptix_response, str):
             auptix_response = json.loads(auptix_response)
         rates, freight_class = parse_auptix_response(auptix_response)
         return rates, freight_class
     except requests.exceptions.HTTPError as http_err:
         error_message = f"HTTP error occurred: {http_err.response.text}"  # Capture the full error response
-        print(f"Error occurred while processing Auptix API: {error_message}")
+        logging.error(f"Error occurred while processing Auptix API: {error_message}")
         raise ValueError(error_message)  # Raise an error with the detailed message
     except Exception as e:
-        print(f"Error occurred while processing Auptix API: {e}")
+        logging.error(f"Error occurred while processing Auptix API: {e}")
         return {'STANDARD_INFLEXIBLE': 'N/A', 'FLOCK_DIRECT_INFLEXIBLE': 'N/A'}, 'N/A'
 
 def process_quote(so_grouped_data):
@@ -276,13 +311,13 @@ def process_quote(so_grouped_data):
         mapped_accessorials = map_accessorials(so_data['Accessorials'].split(','))
 
         if not so_data['items']:
-            print(f"Warning: No items found for SO '{so}'")
+            logging.warning(f"Warning: No items found for SO '{so}'")
             continue
 
         try:
             daylight_net_charge, daylight_class = process_daylight_quote(so_data, so_data['items'], mapped_accessorials, daylight_api)
         except Exception as e:
-            print(f"Error occurred while processing Daylight API: {e}")
+            logging.error(f"Error occurred while processing Daylight API: {e}")
             daylight_net_charge, daylight_class = 'N/A', 'N/A'
 
         try:
@@ -292,7 +327,7 @@ def process_quote(so_grouped_data):
                 auptix_api=auptix_api
             )
         except Exception as e:
-            print(f"Error occurred while processing Auptix API: {e}")
+            logging.error(f"Error occurred while processing Auptix API: {e}")
             rates, freight_class = {'STANDARD_INFLEXIBLE': 'N/A', 'FLOCK_DIRECT_INFLEXIBLE': 'N/A'}, 'N/A'
 
         result = {
@@ -317,21 +352,21 @@ def process_quote(so_grouped_data):
             'Warehouse Location': so_data['warehouseLocation']
         }
         results.append(result)
-
+        write_to_json_file_async(result)  # 使用异步写入
     return results
 
 @app.route('/process_form', methods=['POST'])
 def process_form():
     data = request.get_json()
-    print(f"Received data: {data}")  # Log the received data for debugging
+    logging.info(f"Received data: {data}")  # Log the received data for debugging
 
     if isinstance(data, list):
         so_grouped_data = {}
         for row in data:
             so = row.get('so', '').strip()  # Strip any leading or trailing whitespace from SO
-            print(f"Processing SO: '{so}'")  # Log the SO to ensure it's being captured correctly
+            logging.info(f"Processing SO: '{so}'")  # Log the SO to ensure it's being captured correctly
             if not so:
-                print(f"Warning: Empty SO encountered in row: {row}")
+                logging.warning(f"Warning: Empty SO encountered in row: {row}")
                 continue
 
             if so not in so_grouped_data:
@@ -363,7 +398,7 @@ def process_form():
                     "nmfcSubNumber": "",
                     "pcs": 0,
                     "pallets": item.get('palletNumber', 1),
-                    "weight": weight,
+                    "weight": int(weight) * int(item.get('palletNumber', 1)),
                     "actualClass": freight_class,  # Setting actual class here
                     "dimensions": f"{length}*{width}*{height}",
                     "freightClass": f"CLASS_{freight_class}"  # Setting freight class here
@@ -376,8 +411,8 @@ def process_form():
         except ValueError as e:
             return jsonify({"error": str(e)}), 500
     else:
-        print("Warning: Received data is not a list")
+        logging.warning("Warning: Received data is not a list")
         return jsonify({"error": "Invalid data format"}), 400
 
 if __name__ == '__main__':
-    app.run(debug=True)
+    app.run(debug=False)

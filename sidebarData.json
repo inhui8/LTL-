@@ -1,0 +1,37 @@
+{
+    "menuItems": [
+        {
+            "name": "首页", 
+            "link": "shouye.html"
+        },
+        {
+            "name": "LTL报价", 
+            "link": "#",
+            "subItems": [
+                {"name": "LTL客户报价", "link": "index.html"},
+                {"name": "LTL自用报价", "link": "LTLSelftQuote.html"},
+                {"name": "LTL报价历史", "link": "quoteHistory.html"},
+                {"name": "LTL运行日志", "link": "log.html"}
+            ]
+        },
+        {
+            "name": "海外操作", 
+            "link": "#",
+            "subItems": [
+                {"name": "订单列表", "link": "#"},
+                {"name": "一件代发", "link": "#"},
+                {"name": "中转订单", "link": "#"},
+                {"name": "货物跟踪", "link": "#"},
+                {"name": "客户指令", "link": "#"},
+                {"name": "预约信息", "link": "#"}
+            ]
+        },
+        {"name": "订单列表", "link": "#"},
+        {"name": "货物跟踪", "link": "#"},
+        {"name": "客户指令", "link": "#"},
+        {"name": "预估信息", "link": "#"},
+        {"name": "产品管理", "link": "#"},
+        {"name": "系统设置", "link": "#"},
+        {"name": "应收账单", "link": "#"}
+    ]
+}
