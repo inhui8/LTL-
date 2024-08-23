@@ -442,8 +442,6 @@
         "Auptix Flock Direct Inflexible": "1905.00",
         "Warehouse Location": "LA"
     },
-
-
     {
         "SO": "1",
         "Accessorials": "Lift Gate Delivery,Appointment Fee",
@@ -631,6 +629,48 @@
         "Auptix Class": "CLASS_92_5",
         "Auptix Standard Inflexible": "314.22",
         "Auptix Flock Direct Inflexible": "1943.00",
+        "Warehouse Location": "LA"
+    },
+    {
+        "SO": "990240700029053",
+        "Accessorials": "Appointment Fee, Lift Gate Delivery",
+        "Length (inch)": "53",
+        "Width (inch)": "27",
+        "Height (inch)": "30",
+        "Weight": 274,
+        "Delivery Zip": "28805",
+        "Pallet Number": 2,
+        "Pick Up Date": 45530,
+        "Delivery Service Type": "CALL_FOR_APPOINTMENT",
+        "Location Type": "BUSINESS_NO_DOCK",
+        "Has Pallet Jack and Forklift": "No",
+        "Shipment Service Type": "WINDOW",
+        "Daylight": 627.7,
+        "Daylight Class": "CLASS_175",
+        "Auptix Class": "CLASS_92_5",
+        "Auptix Standard Inflexible": "316.36",
+        "Auptix Flock Direct Inflexible": "1956.00",
+        "Warehouse Location": "LA"
+    },
+    {
+        "SO": "990240700029053",
+        "Accessorials": "Appointment Fee, Lift Gate Delivery",
+        "Length (inch)": "53",
+        "Width (inch)": "27",
+        "Height (inch)": "30",
+        "Weight": 274,
+        "Delivery Zip": "28805",
+        "Pallet Number": 2,
+        "Pick Up Date": 45530,
+        "Delivery Service Type": "CALL_FOR_APPOINTMENT",
+        "Location Type": "BUSINESS_NO_DOCK",
+        "Has Pallet Jack and Forklift": "No",
+        "Shipment Service Type": "WINDOW",
+        "Daylight": 627.7,
+        "Daylight Class": "CLASS_175",
+        "Auptix Class": "CLASS_92_5",
+        "Auptix Standard Inflexible": "316.36",
+        "Auptix Flock Direct Inflexible": "1956.00",
         "Warehouse Location": "LA"
     }
 ]

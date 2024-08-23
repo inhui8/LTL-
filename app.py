@@ -9,7 +9,7 @@ import logging
 from concurrent.futures import ThreadPoolExecutor
 
 # 配置日志记录
-logging.basicConfig(filename='log.txt', level=logging.INFO, 
+logging.basicConfig(filename='frontEnd/log.txt', level=logging.INFO, 
                     format='%(asctime)s %(levelname)s:%(message)s')
 
 # 创建一个全局线程池
@@ -174,11 +174,11 @@ def process_daylight_quote(so_data, items, mapped_accessorials, daylight_api):
         logging.error(f"Error occurred while processing Daylight API: {e}")
         return 'N/A', 'N/A'
 
-def write_to_json_file_async(data, filename='data.json'):
+def write_to_json_file_async(data, filename='frontEnd/data.json'):
     """异步写入 JSON 文件的函数"""
     executor.submit(write_to_json_file, data, filename)
 
-def write_to_json_file(data, filename='data.json'):
+def write_to_json_file(data, filename='frontEnd/data.json'):
     """实际的文件写入操作"""
     try:
         # 读取已有的数据
