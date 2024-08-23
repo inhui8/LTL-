@@ -143,7 +143,7 @@
         const maxLines = 1500;
 
         function loadLogData() {
-            fetch('log.txt')
+            fetch('../log.txt')
                 .then(response => response.text())
                 .then(data => {
                     logData = data.split('\n');
