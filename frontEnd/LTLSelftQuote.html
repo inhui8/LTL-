@@ -253,7 +253,7 @@
 
                 try {
                     for (const shipment of formattedData) {
-                        const response = await fetch('http://127.0.0.1:5000/process_form', {
+                        const response = await fetch('https://ltlquote-dfargufrgqekcmam.eastus-01.azurewebsites.net/process_form', {
                             method: 'POST',
                             headers: {
                                 'Content-Type': 'application/json',
