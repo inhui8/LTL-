@@ -1,21 +1,27 @@
-from flask import Flask, request, jsonify
+from flask import Flask, request, jsonify, send_from_directory
 import pandas as pd
 import json
 from flask_cors import CORS
 from datetime import datetime, timedelta
-from rate_quote import RateQuoteAPI, AuptixRateQuoteAPI  # Import the classes
+from rate_quote import RateQuoteAPI, AuptixRateQuoteAPI
 import requests
 import logging
 from concurrent.futures import ThreadPoolExecutor
+import os
+
+# 定义持久化存储路径（Azure App Service 的 /home 目录）
+BASE_DIR = '/home'  # Azure App Service 的可写目录
+LOG_FILE = os.path.join(BASE_DIR, 'log.txt')
+DATA_FILE = os.path.join(BASE_DIR, 'data.json')
 
 # 配置日志记录
-logging.basicConfig(filename='frontEnd/log.txt', level=logging.INFO, 
+logging.basicConfig(filename=LOG_FILE, level=logging.INFO, 
                     format='%(asctime)s %(levelname)s:%(message)s')
 
 # 创建一个全局线程池
 executor = ThreadPoolExecutor(max_workers=5)
 
-# Flask app initialization
+# Flask app 初始化
 app = Flask(__name__)
 CORS(app)
 
@@ -24,16 +30,16 @@ def load_config():
         return json.load(file)
 
 def excel_date_to_string(excel_date):
-    base_date = datetime(1899, 12, 30)  # Excel's "epoch" date
+    base_date = datetime(1899, 12, 30)  # Excel 的起始日期
     delta = timedelta(days=int(excel_date))
     return (base_date + delta).strftime('%Y-%m-%d')
 
 def calculate_freight_class(weight, length, width, height):
-    # Calculate volume in cubic feet
-    volume = (length * width * height) / 1728  # Convert cubic inches to cubic feet
+    # 计算体积（立方英尺）
+    volume = (length * width * height) / 1728  # 转换为立方英尺
     density = weight / volume
 
-    # Determine freight class based on density
+    # 根据密度确定运费等级
     if density >= 50:
         return '50'
     elif density >= 35:
@@ -174,11 +180,11 @@ def process_daylight_quote(so_data, items, mapped_accessorials, daylight_api):
         logging.error(f"Error occurred while processing Daylight API: {e}")
         return 'N/A', 'N/A'
 
-def write_to_json_file_async(data, filename='frontEnd/data.json'):
+def write_to_json_file_async(data, filename=DATA_FILE):
     """异步写入 JSON 文件的函数"""
     executor.submit(write_to_json_file, data, filename)
 
-def write_to_json_file(data, filename='frontEnd/data.json'):
+def write_to_json_file(data, filename=DATA_FILE):
     """实际的文件写入操作"""
     try:
         # 读取已有的数据
@@ -233,7 +239,7 @@ def parse_auptix_response(response):
 def process_auptix_quote(so_data, items, auptix_api):
     pickup_date_str = excel_date_to_string(so_data['pick_up_date'])
     warehouse_address = get_warehouse_address(so_data['warehouseLocation'])
-    # Create a list of shipment items by iterating through all items under the same SO
+    # 创建货运项目列表，通过迭代所有项目
     shipment_items = []
     for item in items:
         dimensions = item.get('dimensions', '0*0*0')
@@ -279,7 +285,7 @@ def process_auptix_quote(so_data, items, auptix_api):
                     "endTime": "16:00"
                 }
             },
-            "shipmentItems": shipment_items,  # Use the combined shipment items here
+            "shipmentItems": shipment_items,
             "additionalServices": {
                 "reeferProhibited": True
             }
@@ -294,9 +300,9 @@ def process_auptix_quote(so_data, items, auptix_api):
         rates, freight_class = parse_auptix_response(auptix_response)
         return rates, freight_class
     except requests.exceptions.HTTPError as http_err:
-        error_message = f"HTTP error occurred: {http_err.response.text}"  # Capture the full error response
+        error_message = f"HTTP error occurred: {http_err.response.text}"
         logging.error(f"Error occurred while processing Auptix API: {error_message}")
-        raise ValueError(error_message)  # Raise an error with the detailed message
+        raise ValueError(error_message)
     except Exception as e:
         logging.error(f"Error occurred while processing Auptix API: {e}")
         return {'STANDARD_INFLEXIBLE': 'N/A', 'FLOCK_DIRECT_INFLEXIBLE': 'N/A'}, 'N/A'
@@ -323,7 +329,7 @@ def process_quote(so_grouped_data):
         try:
             rates, freight_class = process_auptix_quote(
                 so_data,
-                so_data['items'],  # Pass all items to Auptix
+                so_data['items'],
                 auptix_api=auptix_api
             )
         except Exception as e:
@@ -352,19 +358,19 @@ def process_quote(so_grouped_data):
             'Warehouse Location': so_data['warehouseLocation']
         }
         results.append(result)
-        write_to_json_file_async(result)  # 使用异步写入
+        write_to_json_file_async(result)
     return results
 
 @app.route('/process_form', methods=['POST'])
 def process_form():
     data = request.get_json()
-    logging.info(f"Received data: {data}")  # Log the received data for debugging
+    logging.info(f"Received data: {data}")
 
     if isinstance(data, list):
         so_grouped_data = {}
         for row in data:
-            so = row.get('so', '').strip()  # Strip any leading or trailing whitespace from SO
-            logging.info(f"Processing SO: '{so}'")  # Log the SO to ensure it's being captured correctly
+            so = row.get('so', '').strip()
+            logging.info(f"Processing SO: '{so}'")
             if not so:
                 logging.warning(f"Warning: Empty SO encountered in row: {row}")
                 continue
@@ -383,7 +389,6 @@ def process_form():
                     'items': []
                 }
 
-            # Calculate freight class here
             for item in row.get('cargoItems', []):
                 length = int(item.get('length', 0))
                 width = int(item.get('width', 0))
@@ -391,7 +396,6 @@ def process_form():
                 weight = int(item.get('weight', 0))
                 freight_class = calculate_freight_class(weight, length, width, height)
 
-                # Append the current item to the SO's list of items
                 so_grouped_data[so]['items'].append({
                     "description": "General Merchandise",
                     "nmfcNumber": "",
@@ -399,12 +403,11 @@ def process_form():
                     "pcs": 0,
                     "pallets": item.get('palletNumber', 1),
                     "weight": int(weight) * int(item.get('palletNumber', 1)),
-                    "actualClass": freight_class,  # Setting actual class here
+                    "actualClass": freight_class,
                     "dimensions": f"{length}*{width}*{height}",
-                    "freightClass": f"CLASS_{freight_class}"  # Setting freight class here
+                    "freightClass": f"CLASS_{freight_class}"
                 })
 
-        # Call the process_quote function to process the data
         try:
             results = process_quote(so_grouped_data)
             return jsonify(results), 200
