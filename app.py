@@ -1,27 +1,12 @@
-from flask import Flask, request, jsonify, send_from_directory
+from flask import Flask, request, jsonify
 import pandas as pd
 import json
 from flask_cors import CORS
 from datetime import datetime, timedelta
-from rate_quote import RateQuoteAPI, AuptixRateQuoteAPI
+from rate_quote import RateQuoteAPI, AuptixRateQuoteAPI  # Import the classes
 import requests
-import logging
-from concurrent.futures import ThreadPoolExecutor
-import os
 
-# 定义持久化存储路径（Azure App Service 的 /home 目录）
-BASE_DIR = '/home'  # Azure App Service 的可写目录
-LOG_FILE = os.path.join(BASE_DIR, 'log.txt')
-DATA_FILE = os.path.join(BASE_DIR, 'data.json')
-
-# 配置日志记录
-logging.basicConfig(filename=LOG_FILE, level=logging.INFO, 
-                    format='%(asctime)s %(levelname)s:%(message)s')
-
-# 创建一个全局线程池
-executor = ThreadPoolExecutor(max_workers=5)
-
-# Flask app 初始化
+# Flask app initialization
 app = Flask(__name__)
 CORS(app)
 
@@ -30,16 +15,16 @@ def load_config():
         return json.load(file)
 
 def excel_date_to_string(excel_date):
-    base_date = datetime(1899, 12, 30)  # Excel 的起始日期
+    base_date = datetime(1899, 12, 30)  # Excel's "epoch" date
     delta = timedelta(days=int(excel_date))
     return (base_date + delta).strftime('%Y-%m-%d')
 
 def calculate_freight_class(weight, length, width, height):
-    # 计算体积（立方英尺）
-    volume = (length * width * height) / 1728  # 转换为立方英尺
+    # Calculate volume in cubic feet
+    volume = (length * width * height) / 1728  # Convert cubic inches to cubic feet
     density = weight / volume
 
-    # 根据密度确定运费等级
+    # Determine freight class based on density
     if density >= 50:
         return '50'
     elif density >= 35:
@@ -95,7 +80,6 @@ def map_accessorials(accessorials):
         'Compliance Services Fee': 'Delivery'
     }
     return [{'accId': acc_id.strip(), 'accName': mapping.get(acc_id.strip(), 'O')} for acc_id in accessorials]
-
 def get_warehouse_address(location):
     addresses = {
         "LA": {
@@ -124,7 +108,6 @@ def get_warehouse_address(location):
         }
     }
     return addresses.get(location, {})
-
 def process_daylight_quote(so_data, items, mapped_accessorials, daylight_api):
     pickup_date_str = excel_date_to_string(so_data['pick_up_date'])
     warehouse_address = get_warehouse_address(so_data['warehouseLocation'])
@@ -167,9 +150,9 @@ def process_daylight_quote(so_data, items, mapped_accessorials, daylight_api):
         }
     }
     try:
-        logging.info(f"Sending Daylight request: {json.dumps(daylight_payload, indent=2)}")
+        print(f"Sending Daylight request: {json.dumps(daylight_payload, indent=2)}")
         daylight_response = daylight_api.get_rate_quote(daylight_payload)
-        logging.info(f"Received Daylight response: {daylight_response}")
+        print(f"Received Daylight response: {daylight_response}")
         if isinstance(daylight_response, str):
             daylight_response = json.loads(daylight_response)
         net_charge, freight_class = parse_daylight_response(daylight_response)
@@ -177,32 +160,8 @@ def process_daylight_quote(so_data, items, mapped_accessorials, daylight_api):
             freight_class = freight_class.replace('.', '_')
         return net_charge, f"CLASS_{freight_class}"
     except Exception as e:
-        logging.error(f"Error occurred while processing Daylight API: {e}")
+        print(f"Error occurred while processing Daylight API: {e}")
         return 'N/A', 'N/A'
-
-def write_to_json_file_async(data, filename=DATA_FILE):
-    """异步写入 JSON 文件的函数"""
-    executor.submit(write_to_json_file, data, filename)
-
-def write_to_json_file(data, filename=DATA_FILE):
-    """实际的文件写入操作"""
-    try:
-        # 读取已有的数据
-        try:
-            with open(filename, 'r') as file:
-                existing_data = json.load(file)
-        except FileNotFoundError:
-            existing_data = []
-
-        # 添加新数据
-        existing_data.append(data)
-
-        # 将更新后的数据写回文件
-        with open(filename, 'w') as file:
-            json.dump(existing_data, file, indent=4)
-        logging.info(f"Data successfully written to {filename}")
-    except Exception as e:
-        logging.error(f"Error writing data to {filename}: {e}")
 
 def parse_daylight_response(response):
     try:
@@ -214,7 +173,7 @@ def parse_daylight_response(response):
             raise ValueError(f"Daylight API error: {error_message}")
         return net_charge, freight_class
     except Exception as e:
-        logging.error(f"Error parsing Daylight response: {e}")
+        print(f"Error parsing Daylight response: {e}")
         return 'N/A', 'N/A'
 
 def parse_auptix_response(response):
@@ -233,13 +192,13 @@ def parse_auptix_response(response):
         freight_class = response['shipment']['shipmentItems'][0]['freightClass']
         return rates, freight_class
     except Exception as e:
-        logging.error(f"Error parsing Auptix response: {e}")
+        print(f"Error parsing Auptix response: {e}")
         return {'STANDARD_INFLEXIBLE': 'pending', 'FLOCK_DIRECT_INFLEXIBLE': 'pending'}, 'N/A'
 
 def process_auptix_quote(so_data, items, auptix_api):
     pickup_date_str = excel_date_to_string(so_data['pick_up_date'])
     warehouse_address = get_warehouse_address(so_data['warehouseLocation'])
-    # 创建货运项目列表，通过迭代所有项目
+    # Create a list of shipment items by iterating through all items under the same SO
     shipment_items = []
     for item in items:
         dimensions = item.get('dimensions', '0*0*0')
@@ -257,7 +216,7 @@ def process_auptix_quote(so_data, items, auptix_api):
             },
             "stackable": False,
             "turnable": True,
-            "totalWeightLbs": int(weight/int(item.get('pallets', 1))),
+            "totalWeightLbs": weight,
             "freightClass": f"CLASS_{freight_class.replace('.', '_')}",
             "description": "General Merchandise"
         })
@@ -285,26 +244,26 @@ def process_auptix_quote(so_data, items, auptix_api):
                     "endTime": "16:00"
                 }
             },
-            "shipmentItems": shipment_items,
+            "shipmentItems": shipment_items,  # Use the combined shipment items here
             "additionalServices": {
                 "reeferProhibited": True
             }
         }
     }
     try:
-        logging.info(f"Sending Auptix request: {json.dumps(auptix_payload, indent=2)}")
+        print(f"Sending Auptix request: {json.dumps(auptix_payload, indent=2)}")
         auptix_response = auptix_api.get_rate_quote(auptix_payload)
-        logging.info(f"Received Auptix response: {auptix_response}")
+        print(f"Received Auptix response: {auptix_response}")
         if isinstance(auptix_response, str):
             auptix_response = json.loads(auptix_response)
         rates, freight_class = parse_auptix_response(auptix_response)
         return rates, freight_class
     except requests.exceptions.HTTPError as http_err:
-        error_message = f"HTTP error occurred: {http_err.response.text}"
-        logging.error(f"Error occurred while processing Auptix API: {error_message}")
-        raise ValueError(error_message)
+        error_message = f"HTTP error occurred: {http_err.response.text}"  # Capture the full error response
+        print(f"Error occurred while processing Auptix API: {error_message}")
+        raise ValueError(error_message)  # Raise an error with the detailed message
     except Exception as e:
-        logging.error(f"Error occurred while processing Auptix API: {e}")
+        print(f"Error occurred while processing Auptix API: {e}")
         return {'STANDARD_INFLEXIBLE': 'N/A', 'FLOCK_DIRECT_INFLEXIBLE': 'N/A'}, 'N/A'
 
 def process_quote(so_grouped_data):
@@ -317,23 +276,23 @@ def process_quote(so_grouped_data):
         mapped_accessorials = map_accessorials(so_data['Accessorials'].split(','))
 
         if not so_data['items']:
-            logging.warning(f"Warning: No items found for SO '{so}'")
+            print(f"Warning: No items found for SO '{so}'")
             continue
 
         try:
             daylight_net_charge, daylight_class = process_daylight_quote(so_data, so_data['items'], mapped_accessorials, daylight_api)
         except Exception as e:
-            logging.error(f"Error occurred while processing Daylight API: {e}")
+            print(f"Error occurred while processing Daylight API: {e}")
             daylight_net_charge, daylight_class = 'N/A', 'N/A'
 
         try:
             rates, freight_class = process_auptix_quote(
                 so_data,
-                so_data['items'],
+                so_data['items'],  # Pass all items to Auptix
                 auptix_api=auptix_api
             )
         except Exception as e:
-            logging.error(f"Error occurred while processing Auptix API: {e}")
+            print(f"Error occurred while processing Auptix API: {e}")
             rates, freight_class = {'STANDARD_INFLEXIBLE': 'N/A', 'FLOCK_DIRECT_INFLEXIBLE': 'N/A'}, 'N/A'
 
         result = {
@@ -358,21 +317,21 @@ def process_quote(so_grouped_data):
             'Warehouse Location': so_data['warehouseLocation']
         }
         results.append(result)
-        write_to_json_file_async(result)
+
     return results
 
 @app.route('/process_form', methods=['POST'])
 def process_form():
     data = request.get_json()
-    logging.info(f"Received data: {data}")
+    print(f"Received data: {data}")  # Log the received data for debugging
 
     if isinstance(data, list):
         so_grouped_data = {}
         for row in data:
-            so = row.get('so', '').strip()
-            logging.info(f"Processing SO: '{so}'")
+            so = row.get('so', '').strip()  # Strip any leading or trailing whitespace from SO
+            print(f"Processing SO: '{so}'")  # Log the SO to ensure it's being captured correctly
             if not so:
-                logging.warning(f"Warning: Empty SO encountered in row: {row}")
+                print(f"Warning: Empty SO encountered in row: {row}")
                 continue
 
             if so not in so_grouped_data:
@@ -389,6 +348,7 @@ def process_form():
                     'items': []
                 }
 
+            # Calculate freight class here
             for item in row.get('cargoItems', []):
                 length = int(item.get('length', 0))
                 width = int(item.get('width', 0))
@@ -396,26 +356,28 @@ def process_form():
                 weight = int(item.get('weight', 0))
                 freight_class = calculate_freight_class(weight, length, width, height)
 
+                # Append the current item to the SO's list of items
                 so_grouped_data[so]['items'].append({
                     "description": "General Merchandise",
                     "nmfcNumber": "",
                     "nmfcSubNumber": "",
                     "pcs": 0,
                     "pallets": item.get('palletNumber', 1),
-                    "weight": int(weight) * int(item.get('palletNumber', 1)),
-                    "actualClass": freight_class,
+                    "weight": weight,
+                    "actualClass": freight_class,  # Setting actual class here
                     "dimensions": f"{length}*{width}*{height}",
-                    "freightClass": f"CLASS_{freight_class}"
+                    "freightClass": f"CLASS_{freight_class}"  # Setting freight class here
                 })
 
+        # Call the process_quote function to process the data
         try:
             results = process_quote(so_grouped_data)
             return jsonify(results), 200
         except ValueError as e:
             return jsonify({"error": str(e)}), 500
     else:
-        logging.warning("Warning: Received data is not a list")
+        print("Warning: Received data is not a list")
         return jsonify({"error": "Invalid data format"}), 400
 
 if __name__ == '__main__':
-    app.run(debug=False)
+    app.run(debug=True)
